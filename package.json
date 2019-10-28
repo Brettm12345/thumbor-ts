@@ -1,0 +1,26 @@
+{
+  "name": "thumbor-ts",
+  "version": "1.0.1",
+  "description": "Typescript thumbor url builder",
+  "scripts": {
+    "lint": "eslint --ext .ts ./src",
+    "test": "jest",
+    "build": "tsc",
+    "prepublish": "tsc"
+  },
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
+  },
+  "devDependencies": {
+    "@brettm12345/eslint-config-node": "^1.0.4",
+    "@types/crypto-js": "^3.1.43",
+    "@types/jest": "^24.0.20",
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  }
+}

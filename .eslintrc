@@ -1,0 +1,18 @@
+{
+  "extends": "@brettm12345/eslint-config-node",
+  "env": {
+    "jest/globals": true
+  },
+  "rules": {
+    "fp/no-arguments": "off",
+    "fp/no-class": "off",
+    "fp/no-delete": "off",
+    "fp/no-events": "off",
+    "fp/no-get-set": "off",
+    "fp/no-loops": "off",
+    "fp/no-mutating-methods": "off",
+    "fp/no-proxy": "off",
+    "fp/no-this": "off",
+    "fp/no-valueof-field": "off"
+  }
+}
