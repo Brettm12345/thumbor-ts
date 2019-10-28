@@ -10,7 +10,7 @@ export type Crop = Record<
   number
 >;
 
-class Thumbor {
+export class Thumbor {
   private imagePath = '';
   private width = 0;
   private height = 0;
@@ -470,5 +470,3 @@ class Thumbor {
     return parts;
   }
 }
-
-export default Thumbor;

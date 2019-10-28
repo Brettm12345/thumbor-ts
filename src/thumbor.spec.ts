@@ -1,4 +1,4 @@
-import Thumbor from './thumbor'
+import { Thumbor } from './thumbor'
 
 describe('thumbor', () => {
   const serverUrl = 'http://localhost';
