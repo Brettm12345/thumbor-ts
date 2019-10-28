@@ -1,6 +1,6 @@
 {
   "name": "thumbor-ts",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Typescript thumbor url builder",
   "scripts": {
     "lint": "eslint --ext .ts ./src",
@@ -9,7 +9,7 @@
     "prepublish": "tsc"
   },
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "crypto-js": "^3.1.9-1"
