@@ -125,10 +125,10 @@ export class Thumbor {
   crop(left: number, top: number, right: number, bottom: number) {
     if (allGt0(left, top, right, bottom)) {
       this.cropValues = {
-        left: left,
-        top: top,
-        right: right,
-        bottom: bottom
+        left,
+        top,
+        right,
+        bottom
       };
     }
     return this;
@@ -392,6 +392,11 @@ export class Thumbor {
   buildUrl(): string {
     const operation = this.getOperationPath();
     const hmac = this.getHmac(operation);
+    this.filters = [];
+    this.vAlignValue = null;
+    this.hAlignValue = null;
+    this.meta = false;
+    this.fitInFlag = false;
     return `${this.serverUrl}/${hmac}/${operation}${this.imagePath}`;
   }
 
