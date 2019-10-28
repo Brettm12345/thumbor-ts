@@ -1,6 +1,6 @@
 {
   "name": "thumbor-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Typescript thumbor url builder",
   "scripts": {
     "lint": "eslint --ext .ts ./src",
