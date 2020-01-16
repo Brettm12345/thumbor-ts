@@ -11,6 +11,16 @@ describe('thumbor', () => {
     expect(image.buildUrl()).toBe(`${unsafeUrl}${imagePath}`);
   });
 
+  it('Removes duplicates', () => {
+    expect(
+      image
+        .grayscale()
+        .grayscale()
+        .grayscale()
+        .buildUrl()
+    ).toBe(`${unsafeUrl}/filters:grayscale()${imagePath}`);
+  });
+
   it('Works with resize', () => {
     expect(image.resize(30, 30).buildUrl()).toContain(`30x30`);
   });

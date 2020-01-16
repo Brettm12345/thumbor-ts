@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "declaration": true,
+    "downlevelIteration": true,
     "esModuleInterop": true,
     "module": "commonjs",
     "noImplicitAny": true,

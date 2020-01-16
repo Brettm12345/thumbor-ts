@@ -1,5 +1,7 @@
 /* eslint-disable fp/no-class, fp/no-this */
+import { uniq } from 'fp-ts/lib/Array';
 import crypto from 'crypto-js';
+import { eqString } from 'fp-ts/lib/Eq';
 
 export type VAlign = 'top' | 'middle' | 'bottom';
 export type HAlign = 'right' | 'center' | 'left';
@@ -21,23 +23,38 @@ export class Thumbor {
   private securityKey: string | undefined = undefined;
   private filters: string[] = [];
   private urlParts: string[] = [];
-  constructor(private options: Options) {
-    Object.assign(this, options);
+  constructor(options: Options) {
+    this.serverUrl = options.serverUrl;
+    this.securityKey = options.securityKey;
+    this.filters = options.filters || [];
+    this.urlParts = options.urlParts || [];
+    this.imagePath = options.imagePath || '';
   }
 
   private assignOptions(options: Partial<Options>) {
-    return new Thumbor(Object.assign(this.options, options));
+    return new Thumbor(
+      Object.assign(
+        {
+          serverUrl: this.serverUrl,
+          securityKey: this.securityKey,
+          filters: this.filters,
+          urlParts: this.urlParts,
+          imagePath: this.imagePath
+        },
+        options
+      )
+    );
   }
 
   private addPart(part: string) {
     return this.assignOptions({
-      urlParts: [...this.urlParts.filter(p => p === part), part]
+      urlParts: [...this.urlParts, part]
     });
   }
 
   private addFilter(filter: string) {
     return this.assignOptions({
-      filters: [...this.filters.filter(f => f === filter), filter]
+      filters: [...this.filters, filter]
     });
   }
 
@@ -372,7 +389,9 @@ export class Thumbor {
       this.urlParts.length > 0 ? this.urlParts.join('/') : ''
     }${
       this.filters.length > 0
-        ? `/filters:${this.filters.join(':')}`
+        ? `${this.urlParts.length > 0 ? '/' : ''}filters:${uniq(
+            eqString
+          )(this.filters).join(':')}`
         : ''
     }`;
     const hmac = this.getHmac(operation);
