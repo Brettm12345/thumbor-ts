@@ -366,7 +366,11 @@ export class Thumbor {
   buildUrl(): string {
     const operation = `${
       this.urlParts.length > 0 ? this.urlParts.join('/') : ''
-    }${this.filters.length > 0 ? `/${this.filters.join('/')}` : ''}`;
+    }${
+      this.filters.length > 0
+        ? `/filters:${this.filters.join(':')}`
+        : ''
+    }`;
     const hmac = this.getHmac(operation);
     return `${this.serverUrl}/${hmac}/${operation}${
       operation.length > 0 ? '/' : ''
