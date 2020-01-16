@@ -30,11 +30,15 @@ export class Thumbor {
   }
 
   private addPart(part: string) {
-    return this.assignOptions({ urlParts: [...this.urlParts, part] });
+    return this.assignOptions({
+      urlParts: [...this.urlParts.filter(p => p === part), part]
+    });
   }
 
   private addFilter(filter: string) {
-    return this.assignOptions({ filters: [...this.filters, filter] });
+    return this.assignOptions({
+      filters: [...this.filters.filter(f => f === filter), filter]
+    });
   }
 
   /**
