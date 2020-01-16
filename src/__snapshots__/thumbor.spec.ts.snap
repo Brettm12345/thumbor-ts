@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`thumbor Works with security keys 1`] = `"http://localhost/CYu_cdhdYLcqLyTe8gpCpfNml34=/30x30/react-day-picker.png"`;
