@@ -1,10 +1,10 @@
-import { Thumbor } from './thumbor'
+import { Thumbor } from './thumbor';
 
 describe('thumbor', () => {
   const serverUrl = 'http://localhost';
   const unsafeUrl = `${serverUrl}/unsafe`;
   const imagePath = '/react-day-picker.png';
-  const thumbor = new Thumbor(serverUrl);
+  const thumbor = new Thumbor({ serverUrl });
   const image = thumbor.setPath(imagePath);
 
   it('Generates urls', () => {
@@ -12,7 +12,7 @@ describe('thumbor', () => {
   });
 
   it('Works with resize', () => {
-    expect(image.resize(30, 30).buildUrl()).toContain('30x30');
+    expect(image.resize(30, 30).buildUrl()).toContain(`30x30`);
   });
 
   it('Works with crop', () => {
@@ -26,19 +26,26 @@ describe('thumbor', () => {
   });
 
   it('Works with many filters', () => {
-    const result = image
+    const url = image
       .quality(80)
       .autoJpg()
       .format('webp')
       .buildUrl();
-    expect(result).toContain('quality(80)');
-    expect(result).toContain('format(webp)');
-    expect(result).toContain('autoJpg()');
+    ['quality(80)', 'format(webp)', 'autoJpg()'].forEach(
+      expect(url).toContain
+    );
   });
 
   it('Works with security keys', () => {
-    const secure = new Thumbor(serverUrl, '1234567890123456');
-    const secureImg = secure.setPath(imagePath);
-    expect(secureImg.resize(30, 30).buildUrl()).toMatchSnapshot();
+    const secureThumbor = new Thumbor({
+      serverUrl,
+      securityKey: '12345'
+    });
+    expect(
+      secureThumbor
+        .setPath(imagePath)
+        .resize(30, 30)
+        .buildUrl()
+    ).toMatchSnapshot();
   });
 });

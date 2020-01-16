@@ -1,18 +1,10 @@
 {
-  "extends": "@brettm12345/eslint-config-node",
-  "env": {
-    "jest/globals": true
-  },
+  "plugins": ["jest"],
+  "extends": [
+    "@brettm12345/eslint-config-node",
+    "plugin:jest/recommended"
+  ],
   "rules": {
-    "fp/no-arguments": "off",
-    "fp/no-class": "off",
-    "fp/no-delete": "off",
-    "fp/no-events": "off",
-    "fp/no-get-set": "off",
-    "fp/no-loops": "off",
-    "fp/no-mutating-methods": "off",
-    "fp/no-proxy": "off",
-    "fp/no-this": "off",
-    "fp/no-valueof-field": "off"
+    "unicorn/consistent-function-scoping": "off"
   }
 }

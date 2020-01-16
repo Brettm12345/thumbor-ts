@@ -1,34 +1,40 @@
-import crypto from 'crypto-js'
-
-import { allGt0, sanitizeBase64 } from './util'
+/* eslint-disable fp/no-class, fp/no-this */
+import crypto from 'crypto-js';
 
 export type VAlign = 'top' | 'middle' | 'bottom';
 export type HAlign = 'right' | 'center' | 'left';
 export type Format = 'webp' | 'jpeg' | 'gif' | 'png';
-export type Crop = Record<
-  'left' | 'right' | 'top' | 'bottom',
-  number
->;
+type Side = 'left' | 'right' | 'top' | 'bottom';
+export type Crop = Record<Side, number>;
+
+interface Options {
+  serverUrl: string;
+  securityKey?: string;
+  filters?: string[];
+  imagePath?: string;
+  urlParts?: string[];
+}
 
 export class Thumbor {
+  private serverUrl = '';
   private imagePath = '';
-  private width = 0;
-  private height = 0;
-  private smart = false;
-  private fitInFlag = false;
-  private flipHorizontally = false;
-  private flipVertically = false;
-  private hAlignValue: HAlign | null = null;
-  private vAlignValue: VAlign | null = null;
-  private cropValues: Crop | null = null;
-  private meta = false;
+  private securityKey: string | undefined = undefined;
   private filters: string[] = [];
-  constructor(
-    private serverUrl: string,
-    private securityKey?: string
-  ) {
-    this.serverUrl = serverUrl;
-    this.securityKey = securityKey;
+  private urlParts: string[] = [];
+  constructor(private options: Options) {
+    Object.assign(this, options);
+  }
+
+  private assignOptions(options: Partial<Options>) {
+    return new Thumbor(Object.assign(this.options, options));
+  }
+
+  private addPart(part: string) {
+    return this.assignOptions({ urlParts: [...this.urlParts, part] });
+  }
+
+  private addFilter(filter: string) {
+    return this.assignOptions({ filters: [...this.filters, filter] });
   }
 
   /**
@@ -36,17 +42,17 @@ export class Thumbor {
    * @param {string} path
    */
   setPath(path: string) {
-    this.imagePath = path.replace(/^\//g, '');
-    return this;
+    return this.assignOptions({
+      imagePath: path.replace(/^\//g, '')
+    });
   }
 
   /**
    * Set the security key of the instance
-   * @param {string} key
+   * @param {string} securityKey
    */
-  setSecurityKey(key: string) {
-    this.securityKey = key;
-    return this;
+  setSecurityKey(securityKey: string) {
+    return this.assignOptions({ securityKey });
   }
 
   /**
@@ -60,11 +66,20 @@ export class Thumbor {
    * x 480 image, `.resize(320, 'orig')` yields a 320 x 480 thumbnail.
    * @param  {number} width
    * @param  {number} height
+   * @param  {boolean} flipVertically
+   * @param  {boolean} flipHorizontally
    */
-  resize(width: number, height: number) {
-    this.width = width;
-    this.height = height;
-    return this;
+  resize(
+    width: number,
+    height: number,
+    flipVertically = false,
+    flipHorizontally = false
+  ) {
+    return this.addPart(
+      `${flipVertically ? '-' : ''}${width}x${
+        flipHorizontally ? '-' : ''
+      }${height}`
+    );
   }
 
   /**
@@ -74,18 +89,14 @@ export class Thumbor {
    * @param  {Int} height
    */
   fitIn(width: number, height: number) {
-    this.width = width;
-    this.height = height;
-    this.fitInFlag = true;
-    return this;
+    return this.addPart('fit-in').resize(width, height);
   }
 
   /**
    * Enables smart cropping with an optional value for forcing
    */
   smartCrop() {
-    this.smart = true;
-    return this;
+    return this.addPart('smart');
   }
 
   /**
@@ -93,8 +104,7 @@ export class Thumbor {
    * @param  {HAlign} vAlign 'left', 'center', 'right'
    */
   hAlign(hAlign: HAlign) {
-    this.hAlignValue = hAlign;
-    return this;
+    return this.addPart(hAlign);
   }
 
   /**
@@ -102,8 +112,7 @@ export class Thumbor {
    * @param  {VAlign} vAlign 'top', 'middle', 'bottom'
    */
   vAlign(vAlign: VAlign) {
-    this.vAlignValue = vAlign;
-    return this;
+    return this.addPart(vAlign);
   }
 
   /**
@@ -111,8 +120,7 @@ export class Thumbor {
    * image.
    */
   metaDataOnly() {
-    this.meta = true;
-    return this;
+    return this.addPart('meta');
   }
 
   /**
@@ -123,23 +131,14 @@ export class Thumbor {
    * @param {Integer} bottom
    */
   crop(left: number, top: number, right: number, bottom: number) {
-    if (allGt0(left, top, right, bottom)) {
-      this.cropValues = {
-        left,
-        top,
-        right,
-        bottom
-      };
-    }
-    return this;
+    return this.addPart(`${left}x${top}:${right}x${bottom}`);
   }
 
   /**
    * AutoMatically convert png to jpg.
    */
   autoJpg() {
-    this.filters.push('autoJpg()');
-    return this;
+    return this.addFilter('autoJpg()');
   }
 
   /**
@@ -149,8 +148,7 @@ export class Thumbor {
    * @param {string} color - Any rgb hex color
    */
   backgroundColor(color: string) {
-    this.filters.push(`background_color(${color})`);
-    return this;
+    return this.addFilter(`background_color(${color})`);
   }
 
   /**
@@ -159,8 +157,7 @@ export class Thumbor {
    * @param {number} sigma - Optional. Defaults to the same value as the radius. Sigma used in the gaussian function.
    */
   blur(radius: number, sigma?: number) {
-    this.filters.push(`blur(${radius}, ${sigma || radius})`);
-    return this;
+    return this.addFilter(`blur(${radius}, ${sigma || radius})`);
   }
 
   /**
@@ -168,8 +165,7 @@ export class Thumbor {
    * @param {number} amount - 100 to 100 - The amount (in %) to change the image brightness
    */
   brightness(amount: number) {
-    this.filters.push(`brightness(${amount})`);
-    return this;
+    return this.addFilter(`brightness(${amount})`);
   }
 
   /**
@@ -177,8 +173,7 @@ export class Thumbor {
    * @param {number} amount - 100 to 100 - The amount (in %) to change the image brightness
    */
   contrast(amount: number) {
-    this.filters.push(`contrast(${amount})`);
-    return this;
+    return this.addFilter(`contrast(${amount})`);
   }
 
   /**
@@ -187,23 +182,17 @@ export class Thumbor {
    * @param {number} columns - Number of columns in the matrix.
    * @param {boolean} normalize - Whether or not we should divide each matrix item by the sum of all items.
    */
-  convolution(
-    items: number[],
-    columns: number,
-    normalize: boolean = false
-  ) {
-    this.filters.push(
+  convolution(items: number[], columns: number, normalize = false) {
+    return this.addFilter(
       `convolution(${items.join(';')}, ${columns}, ${normalize})`
     );
-    return this;
   }
 
   /**
    * Equalizes the color distribution in the image.
    */
   equalize() {
-    this.filters.push('equalize()');
-    return this;
+    return this.addFilter(`equalize()`);
   }
 
   /**
@@ -213,8 +202,7 @@ export class Thumbor {
    * To learn more about focal points, visit the Detection Algorithms.
    */
   extractFocal() {
-    this.filters.push('extract_focal()');
-    return this;
+    return this.addFilter(`extract_focal()`);
   }
 
   /**
@@ -224,9 +212,8 @@ export class Thumbor {
    * @param {string} color - Any rgb hex color
    * @param {boolean} fillTransparent - Whether transparent areas of the image should be filled or not.
    */
-  fill(color: string, fillTransparent: boolean = false) {
-    this.filters.push(`fill(${color}, ${fillTransparent})`);
-    return this;
+  fill(color: string, fillTransparent = false) {
+    return this.addFilter(`fill(${color}, ${fillTransparent})`);
   }
 
   /**
@@ -237,7 +224,7 @@ export class Thumbor {
    * @param {number} bottom
    */
   focal(left: number, top: number, right: number, bottom: number) {
-    this.filters.push(`focal(${left}x${top}:${right}x${bottom})`);
+    return this.addFilter(`focal(${left}x${top}:${right}x${bottom})`);
   }
 
   /**
@@ -245,16 +232,14 @@ export class Thumbor {
    * @param {string} format - Either: “webp”, “jpeg”, “gif” or “png”
    */
   format(format: Format) {
-    this.filters.push(`format(${format})`);
-    return this;
+    return this.addFilter(`format(${format})`);
   }
 
   /**
    * Changes the image to grayscale.
    */
   grayscale() {
-    this.filters.push('grayscale()');
-    return this;
+    return this.addFilter('grayscale()');
   }
 
   /**
@@ -263,8 +248,7 @@ export class Thumbor {
    * @param {number} max
    */
   maxBytes(max: number) {
-    this.filters.push(`max_bytes(${max})`);
-    return this;
+    return this.addFilter(`max_bytes(${max})`);
   }
 
   /**
@@ -273,8 +257,7 @@ export class Thumbor {
    * you ask for a 600x400 image, thumbor will still return a 300x200 image.
    */
   noUpscale() {
-    this.filters.push('no_upscale()');
-    return this;
+    return this.addFilter('no_upscale()');
   }
 
   /**
@@ -282,8 +265,7 @@ export class Thumbor {
    * @param {number} amount - 0 to 100 The amount (in %) of noise to add to the image.
    */
   noise(amount: number) {
-    this.filters.push(`noise(${amount})`);
-    return this;
+    return this.addFilter(`noise(${amount})`);
   }
 
   /**
@@ -292,8 +274,7 @@ export class Thumbor {
    * @param {number} amount - 0 to 1
    */
   proportion(amount: number) {
-    this.filters.push(`proportion(${amount})`);
-    return this;
+    return this.addFilter(`proportion(${amount})`);
   }
 
   /**
@@ -302,8 +283,7 @@ export class Thumbor {
    * @param {number} amount - 0 to 100 The quality level (in %) that the end image will feature.
    */
   quality(amount: number) {
-    this.filters.push(`quality(${amount})`);
-    return this;
+    return this.addFilter(`quality(${amount})`);
   }
 
   /**
@@ -313,8 +293,7 @@ export class Thumbor {
    * @param {number} blue - 0 to 100 the amount of blueness in the image
    */
   rgb(red: number, green: number, blue: number) {
-    this.filters.push(`rgb(${red}, ${green}, ${blue})`);
-    return this;
+    return this.addFilter(`rgb(${red}, ${green}, ${blue})`);
   }
 
   /**
@@ -322,8 +301,7 @@ export class Thumbor {
    * @param {number} angle - 0 to 359 The angle to rotate the image. Numbers greater or equal than 360 will be transformed to a equivalent angle between 0 and 359.
    */
   rotate(angle: number) {
-    this.filters.push(`rotate(${angle})`);
-    return this;
+    return this.addFilter(`rotate(${angle})`);
   }
 
   /**
@@ -339,14 +317,13 @@ export class Thumbor {
     red: number,
     green: number,
     blue: number,
-    transparent: boolean = false
+    transparent = false
   ) {
-    this.filters.push(
+    return this.addFilter(
       `round_corner(${
         Array.isArray(radius) ? radius.join('|') : radius
       }, ${red}, ${green}, ${blue}, ${transparent})`
     );
-    return this;
   }
 
   /**
@@ -355,34 +332,31 @@ export class Thumbor {
    * @param {number} radius - Typical values are between 0.0 and 2.0.
    * @param {boolean} luminanceOnly - Sharpen only luminance channel.
    */
-  sharpen(
-    amount: number,
-    radius: number,
-    luminanceOnly: boolean = false
-  ) {
-    this.filters.push(
+  sharpen(amount: number, radius: number, luminanceOnly = false) {
+    return this.addFilter(
       `sharpen(${amount}, ${radius}, ${luminanceOnly})`
     );
-    return this;
   }
 
   /**
    * Removes any Exif information in the resulting image.
    */
   stripExif() {
-    this.filters.push('strip_exif()');
-    return this;
+    return this.addFilter('strip_exif()');
   }
 
-  getHmac(operation: string): string {
-    if (this.securityKey) {
-      const hash = crypto.HmacSHA1(
-        operation + this.imagePath,
-        this.securityKey
-      );
-      return sanitizeBase64(crypto.enc.Base64.stringify(hash));
-    }
-    return 'unsafe';
+  private getHmac(operation: string): string {
+    if (this.securityKey == null) return 'unsafe';
+    const key = crypto.HmacSHA1(
+      operation + this.imagePath,
+      this.securityKey
+    );
+
+    const keyString = crypto.enc.Base64.stringify(key)
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_');
+
+    return keyString;
   }
 
   /**
@@ -390,88 +364,10 @@ export class Thumbor {
    * @return {string}
    */
   buildUrl(): string {
-    const operation = this.getOperationPath();
+    const operation = [...this.urlParts, this.filters.join(':')].join(
+      '/'
+    );
     const hmac = this.getHmac(operation);
-    this.filters = [];
-    this.vAlignValue = null;
-    this.hAlignValue = null;
-    this.meta = false;
-    this.fitInFlag = false;
     return `${this.serverUrl}/${hmac}/${operation}${this.imagePath}`;
-  }
-
-  /**
-   * Converts operation array to string
-   * @return {string}
-   */
-  private getOperationPath(): string {
-    var parts = this.urlParts();
-
-    if (parts.length === 0) {
-      return '';
-    }
-
-    return parts.join('/') + '/';
-  }
-
-  /**
-   * Build operation array
-   *
-   * @TODO Should be refactored so that strings are generated in the
-   * commands as opposed to in 1 massive function
-   *
-   * @return {string[]}
-   */
-  urlParts(): string[] {
-    if (!this.imagePath) {
-      throw new Error("The image url can't be null or empty.");
-    }
-
-    let parts: string[] = [];
-
-    if (this.meta === true) {
-      parts.push('meta');
-    }
-
-    if (this.cropValues != null) {
-      const { left, top, right, bottom } = this.cropValues;
-      parts.push(`${left}x${top}:${right}x${bottom}`);
-    }
-
-    if (this.fitInFlag === true) {
-      parts.push('fit-in');
-    }
-
-    if (
-      this.width ||
-      this.height ||
-      this.flipHorizontally ||
-      this.flipVertically
-    ) {
-      const dashIf = (item: any) => (!!item ? '-' : '');
-
-      const sizeString = `${dashIf(this.flipHorizontally)}${
-        this.width
-      }x${dashIf(this.flipVertically)}${this.height}`;
-      parts.push(sizeString);
-    }
-
-    if (this.hAlignValue != null) {
-      parts.push(this.hAlignValue);
-    }
-
-    if (this.vAlignValue != null) {
-      parts.push(this.vAlignValue);
-    }
-
-    if (this.smart === true) {
-      parts.push('smart');
-    }
-
-    if (this.filters.length > 0) {
-      parts.push('filters:' + this.filters.join(':'));
-    }
-
-    return parts;
   }
 }
