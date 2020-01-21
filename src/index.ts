@@ -11,7 +11,6 @@ import * as R from 'fp-ts/lib/Record';
 import { pipe } from 'fp-ts/lib/pipeable';
 import { Endomorphism, flow } from 'fp-ts/lib/function';
 import { eqString } from 'fp-ts/lib/Eq';
-import { fromNullable } from 'fp-ts/lib/Option';
 export { Thumbor } from './types';
 
 interface Options {
@@ -89,12 +88,12 @@ const Builder = (options: Options): Thumbor => {
     ),
     buildUrl: () => {
       const urlParts = pipe(
-        fromNullable(options.urlParts),
+        O.fromNullable(options.urlParts),
         O.map(a => a.join('/'))
       );
 
       const filters = pipe(
-        fromNullable(options.filters),
+        O.fromNullable(options.filters),
         O.map(
           flow(
             uniq(eqString),
