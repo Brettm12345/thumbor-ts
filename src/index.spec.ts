@@ -1,14 +1,14 @@
-import { Thumbor } from '.';
+import Thumbor from '.';
 
 describe('thumbor', () => {
   const serverUrl = 'http://localhost';
   const unsafeUrl = `${serverUrl}/unsafe`;
-  const imagePath = '/react-day-picker.png';
-  const thumbor = new Thumbor({ serverUrl });
+  const imagePath = 'react-day-picker.png';
+  const thumbor = Thumbor({ serverUrl });
   const image = thumbor.setPath(imagePath);
 
   it('Generates urls', () => {
-    expect(image.buildUrl()).toBe(`${unsafeUrl}${imagePath}`);
+    expect(image.buildUrl()).toBe(`${unsafeUrl}/${imagePath}`);
   });
 
   it('Removes duplicates', () => {
@@ -18,7 +18,7 @@ describe('thumbor', () => {
         .grayscale()
         .grayscale()
         .buildUrl()
-    ).toBe(`${unsafeUrl}/filters:grayscale()${imagePath}`);
+    ).toBe(`${unsafeUrl}/filters:grayscale()/${imagePath}`);
   });
 
   it('Works with resize', () => {
@@ -47,7 +47,7 @@ describe('thumbor', () => {
   });
 
   it('Works with security keys', () => {
-    const secureThumbor = new Thumbor({
+    const secureThumbor = Thumbor({
       serverUrl,
       securityKey: '12345'
     });

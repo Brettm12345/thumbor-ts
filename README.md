@@ -15,7 +15,7 @@ npm install --save thumbor-ts
 import Thumbor from 'thumbor-ts';
 
 // Your encryption key is not required, but your link will be unsafe.
-const thumbor = new Thumbor({ serverUrl: 'http://myserver.thumbor.com', securityKey: 'MY_KEY' });
+const thumbor = Thumbor({ serverUrl: 'http://myserver.thumbor.com', securityKey: 'MY_KEY' });
 
 // Generate your url
 const thumborUrl = thumbor

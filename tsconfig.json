@@ -3,6 +3,7 @@
     "baseUrl": "./src",
     "declaration": true,
     "downlevelIteration": true,
+    "lib": ["DOM", "ESNext"],
     "esModuleInterop": true,
     "module": "commonjs",
     "noImplicitAny": true,
