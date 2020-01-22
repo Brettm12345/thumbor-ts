@@ -28,39 +28,37 @@ const filterLens = nullableOption('filters', []);
 const urlPartLens = nullableOption('urlParts', []);
 const Builder = (options: Options): Thumbor => {
   const modifyOptions = (f: Endomorphism<Options>): Thumbor =>
-    pipe(
-      options,
-      f,
-      Builder
-    );
+    pipe(options, f, Builder);
 
-  const concat = (x: string) => (xs: string[]) => xs.concat(x);
-  const concatStr = (lens: Lens<Options, string[]>) => (
+  const setOption = <A>(lens: Lens<Options, A>) =>
+    flow(lens.set, modifyOptions);
+
+  const concatLens = (lens: Lens<Options, string[]>) => (
     str: string
-  ) => modifyOptions(lens.modify(concat(str)));
+  ) => modifyOptions(lens.modify(xs => xs.concat(str)));
 
   const applyTo = <A>(g: (str: string) => A) => (
     f: (...a: unknown[]) => string
+  ) => flow(f, g);
+
+  const add = <A>(
+    lens: Lens<Options, string[]>,
+    record: Manipulations<string> | Filters<string>
   ) =>
-    flow(
-      f,
-      g
-    );
+    (pipe(
+      (record as unknown) as Record<
+        string,
+        (...a: unknown[]) => string
+      >,
+      R.map(applyTo(concatLens(lens)))
+    ) as unknown) as A;
 
-  type ManipulationRecord = Record<
-    string,
-    (...a: unknown[]) => string
-  >;
+  const manipulations = add<Manipulations<Thumbor>>(
+    urlPartLens,
+    manipulationList
+  );
 
-  const manipulations = (pipe(
-    (manipulationList as unknown) as ManipulationRecord,
-    R.map(applyTo(concatStr(urlPartLens)))
-  ) as unknown) as Manipulations<Thumbor>;
-
-  const imageFilters = (pipe(
-    (filterList as unknown) as ManipulationRecord,
-    R.map(applyTo(concatStr(filterLens)))
-  ) as unknown) as Filters<Thumbor>;
+  const imageFilters = add<Filters<Thumbor>>(filterLens, filterList);
 
   const getHmac = (operation: string): string => {
     if (options.securityKey == null) return 'unsafe';
@@ -75,17 +73,12 @@ const Builder = (options: Options): Thumbor => {
 
     return keyString;
   };
+
   return {
     ...manipulations,
     ...imageFilters,
-    setPath: flow(
-      imagePath.set,
-      modifyOptions
-    ),
-    setSecurityKey: flow(
-      securityKey.set,
-      modifyOptions
-    ),
+    setPath: setOption(imagePath),
+    setSecurityKey: setOption(securityKey),
     buildUrl: () => {
       const urlParts = pipe(
         O.fromNullable(options.urlParts),
