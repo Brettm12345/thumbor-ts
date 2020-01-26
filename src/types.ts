@@ -8,7 +8,7 @@ export type Modifiers<T = string> = Record<
   (...a: unknown[]) => T
 >;
 
-export interface Filters<T> {
+export interface Filters<T = string> {
   /**
    * AutoMatically convert png to jpg.
    */
@@ -182,7 +182,7 @@ export interface Filters<T> {
   stripExif: () => T;
 }
 
-export interface Manipulations<T> {
+export interface Manipulations<T = string> {
   /**
    * Resize the image to the specified dimensions. Overrides any previous call
    * to `fitIn` or `resize`.
