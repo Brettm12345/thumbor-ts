@@ -1,6 +1,7 @@
-import { uniq } from 'fp-ts/lib/Array';
+import { filter, map, uniq, isNonEmpty } from 'fp-ts/lib/Array';
 import * as O from 'fp-ts/lib/Option';
-import { Thumbor, Filters, Manipulations } from './types';
+import * as NonEmptyArray from 'fp-ts/lib/NonEmptyArray';
+import { Thumbor, Filters, Manipulations, Modifiers } from './types';
 import { Lens } from 'monocle-ts';
 import crypto from 'crypto-js';
 import {
@@ -9,9 +10,17 @@ import {
 } from './manipulations';
 import * as R from 'fp-ts/lib/Record';
 import { pipe } from 'fp-ts/lib/pipeable';
-import { Endomorphism, flow } from 'fp-ts/lib/function';
+import {
+  Endomorphism,
+  flow,
+  unsafeCoerce,
+  constant
+} from 'fp-ts/lib/function';
 import { eqString } from 'fp-ts/lib/Eq';
-export { Thumbor } from './types';
+
+const concat = <A>(str: A) => (arr: A[]): A[] => arr.concat(str);
+const join = (str: string) => (arr: unknown[]): string =>
+  arr.join(str);
 
 interface Options {
   serverUrl: string;
@@ -35,30 +44,31 @@ const Builder = (options: Options): Thumbor => {
 
   const concatLens = (lens: Lens<Options, string[]>) => (
     str: string
-  ) => modifyOptions(lens.modify(xs => xs.concat(str)));
+  ) => modifyOptions(lens.modify(concat(str)));
 
   const applyTo = <A>(g: (str: string) => A) => (
     f: (...a: unknown[]) => string
   ) => flow(f, g);
 
-  const add = <A>(
+  const combineAs = <A>(
     lens: Lens<Options, string[]>,
-    record: Manipulations<string> | Filters<string>
-  ) =>
-    (pipe(
-      (record as unknown) as Record<
-        string,
-        (...a: unknown[]) => string
-      >,
-      R.map(applyTo(concatLens(lens)))
-    ) as unknown) as A;
+    record: Modifiers
+  ): A =>
+    pipe<Modifiers, Modifiers<Thumbor>, A>(
+      record,
+      R.map(applyTo(concatLens(lens))),
+      unsafeCoerce
+    );
 
-  const manipulations = add<Manipulations<Thumbor>>(
+  const manipulations: Manipulations<Thumbor> = combineAs(
     urlPartLens,
     manipulationList
   );
 
-  const imageFilters = add<Filters<Thumbor>>(filterLens, filterList);
+  const imageFilters: Filters<Thumbor> = combineAs(
+    filterLens,
+    filterList
+  );
 
   const getHmac = (operation: string): string => {
     if (options.securityKey == null) return 'unsafe';
@@ -82,29 +92,34 @@ const Builder = (options: Options): Thumbor => {
     buildUrl: () => {
       const urlParts = pipe(
         O.fromNullable(options.urlParts),
-        O.map(a => a.join('/'))
+        O.map(join('/'))
+      );
+
+      const param = (key: string) => (value: string): string =>
+        `${key}:${value}`;
+
+      const handleFilters = flow(
+        uniq(eqString),
+        join(':'),
+        param('filters')
       );
 
       const filters = pipe(
         O.fromNullable(options.filters),
-        O.map(
-          flow(
-            uniq(eqString),
-            a => a.join(':'),
-            a => `filters:${a}`
-          )
-        )
+        O.map(handleFilters)
       );
 
-      const operation = [urlParts, filters]
-        .filter(O.isSome)
-        .map(O.toNullable)
-        .join('/');
+      const slash = (a: string): string => `${a}/`;
 
+      const operation = pipe(
+        [urlParts, filters],
+        filter(O.isSome),
+        map(O.toNullable),
+        NonEmptyArray.fromArray,
+        O.fold(constant(''), flow(join('/'), slash))
+      );
       const hmac = getHmac(operation);
-      return `${options.serverUrl}/${hmac}/${operation}${
-        operation.length > 0 ? '/' : ''
-      }${options.imagePath}`;
+      return `${options.serverUrl}/${hmac}/${operation}${options.imagePath}`;
     }
   };
 };

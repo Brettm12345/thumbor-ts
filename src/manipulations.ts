@@ -1,10 +1,13 @@
-import { Filters, Manipulations } from './types';
-import { identity } from 'fp-ts/lib/function';
+import { Filters, Manipulations, Modifiers } from './types';
+import { identity, unsafeCoerce } from 'fp-ts/lib/function';
 
-export const filters: Filters<string> = {
+export const filters: Modifiers = unsafeCoerce<
+  Filters<string>,
+  Modifiers
+>({
   autoJpg: () => 'autoJpg()',
   backgroundColor: color => `background_color(${color})`,
-  blur: (radius, sigma) => `blur(${radius}, ${sigma || radius})`,
+  blur: (radius, sigma) => `blur(${radius}, ${sigma ?? radius})`,
   brightness: amount => `brightness(${amount})`,
   contrast: amount => `contrast(${amount})`,
   convolution: (items, columns, normalize = false) =>
@@ -31,18 +34,23 @@ export const filters: Filters<string> = {
   sharpen: (amount, radius, luminanceOnly = false) =>
     `sharpen(${amount}, ${radius}, ${luminanceOnly})`,
   stripExif: () => `strip_exif()`
-};
+});
 
-export const manipulations: Manipulations<string> = {
+const dash = (bool: boolean): string => (bool ? '-' : '');
+
+export const manipulations: Modifiers = unsafeCoerce<
+  Manipulations<string>,
+  Modifiers
+>({
   resize: (
     width,
     height,
     flipVertically = false,
     flipHorizontally = false
   ) =>
-    `${flipVertically ? '-' : ''}${width}x${
-      flipHorizontally ? '-' : ''
-    }${height}`,
+    `${dash(flipVertically)}${width}x${dash(
+      flipHorizontally
+    )}${height}`,
   fitIn: (width, height) =>
     `fit-in/${manipulations.resize(width, height)}`,
   smartCrop: () => 'smart',
@@ -51,4 +59,4 @@ export const manipulations: Manipulations<string> = {
   metaDataOnly: () => 'meta',
   crop: (left, top, right, bottom) =>
     `${left}x${top}:${right}x${bottom}`
-};
+});

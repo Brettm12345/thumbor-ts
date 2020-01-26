@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "eslint --ext .ts ./src",
     "test": "jest",
+    "test:watch": "jest --watch",
     "build": "tsc",
     "prepublish": "tsc"
   },
@@ -28,6 +29,7 @@
     "eslint": "^6.6.0",
     "eslint-plugin-jest": "^23.6.0",
     "jest": "^24.9.0",
+    "jest-watch-typeahead": "^0.4.2",
     "prettier": "^1.19.1",
     "ts-jest": "^24.1.0"
   }

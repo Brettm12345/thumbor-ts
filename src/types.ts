@@ -3,6 +3,10 @@ export type HAlign = 'right' | 'center' | 'left';
 export type Format = 'webp' | 'jpeg' | 'gif' | 'png';
 type Side = 'left' | 'right' | 'top' | 'bottom';
 export type Crop = Record<Side, number>;
+export type Modifiers<T = string> = Record<
+  string,
+  (...a: unknown[]) => T
+>;
 
 export interface Filters<T> {
   /**
