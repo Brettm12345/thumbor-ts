@@ -5,6 +5,7 @@
     "plugin:jest/recommended"
   ],
   "rules": {
+    "import/no-duplicates": "off",
     "unicorn/consistent-function-scoping": "off"
   }
 }
