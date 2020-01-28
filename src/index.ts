@@ -92,7 +92,7 @@ const Builder = (options: Options): Thumbor => {
                 'Cannot build url. No path is set please set the url with setImagePath'
               )
             ),
-            constant('Error building url')
+            constant('Error building url. No path set')
           ),
           path =>
             pipe(

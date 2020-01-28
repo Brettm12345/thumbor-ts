@@ -11,6 +11,12 @@ describe('thumbor', () => {
     expect(image.buildUrl()).toBe(`${unsafeUrl}/${imagePath}`);
   });
 
+  it('Should fail with no url set', () => {
+    expect(thumbor.buildUrl()).toEqual(
+      'Error building url. No path set'
+    );
+  });
+
   it('Removes duplicates', () => {
     expect(
       image
@@ -22,7 +28,7 @@ describe('thumbor', () => {
   });
 
   it('Works with resize', () => {
-    expect(image.resize(30, 30).buildUrl()).toContain(`30x30`);
+    expect(image.resize(30, 30).buildUrl()).toContain('30x30');
   });
 
   it('Works with crop', () => {
