@@ -1,4 +1,4 @@
-import Thumbor from '.';
+import Thumbor from '../src';
 
 describe('thumbor', () => {
   const serverUrl = 'http://localhost';
