@@ -8,7 +8,7 @@ export type Modifiers<T = string> = Record<
   (...a: unknown[]) => T
 >;
 
-export interface Filters<T = string> {
+export type Filters<T = string> = Readonly<{
   /**
    * AutoMatically convert png to jpg.
    */
@@ -180,9 +180,9 @@ export interface Filters<T = string> {
    * Removes any Exif information in the resulting image.
    */
   stripExif: () => T;
-}
+}>;
 
-export interface Manipulations<T = string> {
+export type Manipulations<T = string> = Readonly<{
   /**
    * Resize the image to the specified dimensions. Overrides any previous call
    * to `fitIn` or `resize`.
@@ -248,7 +248,7 @@ export interface Manipulations<T = string> {
     right: number,
     bottom: number
   ) => T;
-}
+}>;
 
 export interface Thumbor
   extends Filters<Thumbor>,
@@ -257,17 +257,17 @@ export interface Thumbor
    * Set path of image
    * @param {string} path
    */
-  setPath: (path: string) => Thumbor;
+  readonly setPath: (path: string) => Thumbor;
 
   /**
    * Set the security key of the instance
    * @param {string} securityKey
    */
-  setSecurityKey: (securityKey: string) => Thumbor;
+  readonly setSecurityKey: (securityKey: string) => Thumbor;
 
   /**
    * Combine image url and operations with secure and unsecure (unsafe) paths
    * @returns {string} - The built url
    */
-  buildUrl: () => string;
+  readonly buildUrl: () => string;
 }

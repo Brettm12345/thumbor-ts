@@ -3,13 +3,13 @@ import { append, list, List } from 'list/curried';
 
 import * as Lists from './manipulations';
 
-export interface Options {
+export type Options = Readonly<{
   serverUrl: string;
   securityKey?: string;
   filters?: List<string>;
   imagePath?: string;
   urlParts?: List<string>;
-}
+}>;
 
 export type ListName = keyof typeof Lists;
 export type LensName = keyof Options;

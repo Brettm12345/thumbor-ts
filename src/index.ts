@@ -11,7 +11,7 @@ import {
   constant
 } from 'fp-ts/lib/function';
 
-import * as lists from './manipulations';
+import * as manipulations from './manipulations';
 import {
   securityKey,
   urlParts,
@@ -25,14 +25,14 @@ import { Thumbor, Modifiers } from './types';
 import { join, append, uniq, encodeBase64 } from './util';
 
 const Builder = (options: Options): Thumbor => {
-  const modifyOptions = (f: Endomorphism<Options>): Thumbor =>
-    pipe(f(options), Builder);
+  const modifyOptions = (f: Endomorphism<Options>) =>
+    pipe(options, f, Builder);
 
   const setOption = <A>(lens: OptionLens<A>) =>
     flow(lens.set, modifyOptions);
 
   const getOption = <A>(lens: OptionLens<A>) =>
-    pipe(lens.get(options), O.fromNullable);
+    pipe(options, lens.get, O.fromNullable);
 
   const appendLens = (lens: OptionLens<List<string>>) =>
     flow(appendToLens(lens), modifyOptions);
@@ -53,7 +53,7 @@ const Builder = (options: Options): Thumbor => {
       unsafeCoerce
     );
 
-  const getHmac = (operation: string): string =>
+  const getHmac = (operation: string) =>
     pipe(
       getOption(securityKey),
       O.fold(constant('unsafe'), key =>
@@ -78,8 +78,8 @@ const Builder = (options: Options): Thumbor => {
   );
 
   return {
-    ...combine(urlParts, lists.urlParts),
-    ...combine(filters, lists.filters),
+    ...combine(urlParts, manipulations.urlParts),
+    ...combine(filters, manipulations.filters),
     setPath: setOption(imagePath),
     setSecurityKey: setOption(securityKey),
     buildUrl: () =>
