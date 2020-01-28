@@ -17,7 +17,7 @@ import {
   urlParts,
   filters,
   imagePath,
-  appendTo,
+  appendTo as appendToLens,
   OptionLens,
   Options
 } from './lenses';
@@ -34,14 +34,14 @@ const Builder = (options: Options): Thumbor => {
   const getOption = <A>(lens: OptionLens<A>) =>
     pipe(lens.get(options), O.fromNullable);
 
-  const concatLens = (lens: OptionLens<List<string>>) =>
-    flow(appendTo(lens), modifyOptions);
+  const appendLens = (lens: OptionLens<List<string>>) =>
+    flow(appendToLens(lens), modifyOptions);
 
   const applyTo = <A>(g: (str: string) => A) => (
     f: (...a: unknown[]) => string
   ) => flow(f, g);
 
-  const applyConcat = flow(concatLens, applyTo);
+  const appendTo = flow(appendLens, applyTo);
 
   const combine = <A>(
     lens: OptionLens<List<string>>,
@@ -49,7 +49,7 @@ const Builder = (options: Options): Thumbor => {
   ) =>
     pipe<Modifiers, Modifiers<Thumbor>, A>(
       modifiers,
-      R.map(applyConcat(lens)),
+      R.map(appendTo(lens)),
       unsafeCoerce
     );
 
