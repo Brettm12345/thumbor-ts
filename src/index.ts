@@ -1,6 +1,5 @@
 import * as crypto from 'crypto-js';
-import { map, uniq } from 'fp-ts/lib/Array';
-import { eqString } from 'fp-ts/lib/Eq';
+import { list, List, map } from 'list/curried';
 import { error } from 'fp-ts/lib/Console';
 import * as O from 'fp-ts/lib/Option';
 import * as R from 'fp-ts/lib/Record';
@@ -18,12 +17,12 @@ import {
   urlParts,
   filters,
   imagePath,
-  concatTo,
+  appendTo,
   OptionLens,
   Options
 } from './lenses';
 import { Thumbor, Modifiers } from './types';
-import { join, append, encodeBase64 } from './util';
+import { join, append, uniq, encodeBase64 } from './util';
 
 const Builder = (options: Options): Thumbor => {
   const modifyOptions = (f: Endomorphism<Options>): Thumbor =>
@@ -35,8 +34,8 @@ const Builder = (options: Options): Thumbor => {
   const getOption = <A>(lens: OptionLens<A>) =>
     pipe(lens.get(options), O.fromNullable);
 
-  const concatLens = (lens: OptionLens<string[]>) =>
-    flow(concatTo(lens), modifyOptions);
+  const concatLens = (lens: OptionLens<List<string>>) =>
+    flow(appendTo(lens), modifyOptions);
 
   const applyTo = <A>(g: (str: string) => A) => (
     f: (...a: unknown[]) => string
@@ -45,7 +44,7 @@ const Builder = (options: Options): Thumbor => {
   const applyConcat = flow(concatLens, applyTo);
 
   const combine = <A>(
-    lens: OptionLens<string[]>,
+    lens: OptionLens<List<string>>,
     modifiers: Modifiers
   ) =>
     pipe<Modifiers, Modifiers<Thumbor>, A>(
@@ -66,14 +65,14 @@ const Builder = (options: Options): Thumbor => {
     );
 
   const operation = pipe<
-    Array<[OptionLens<string[]>, (xs: string[]) => string]>,
-    string[],
+    List<[OptionLens<List<string>>, (xs: List<string>) => string]>,
+    List<string>,
     string
   >(
-    [
+    list(
       [urlParts, join('/')],
-      [filters, flow(uniq(eqString), join(':'), append('filters:'))]
-    ],
+      [filters, flow(uniq, join(':'), append('filters:'))]
+    ),
     map(([lens, f]) => pipe(lens.get(options), f)),
     join('/')
   );
@@ -97,12 +96,12 @@ const Builder = (options: Options): Thumbor => {
           ),
           path =>
             pipe(
-              [
+              list(
                 options.serverUrl,
                 getHmac(operation),
                 operation,
                 path
-              ],
+              ),
               join('/')
             )
         )

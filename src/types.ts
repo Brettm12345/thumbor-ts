@@ -267,7 +267,7 @@ export interface Thumbor
 
   /**
    * Combine image url and operations with secure and unsecure (unsafe) paths
-   * @return {string}
+   * @returns {string} - The built url
    */
   buildUrl: () => string;
 }

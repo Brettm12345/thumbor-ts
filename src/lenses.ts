@@ -1,13 +1,15 @@
 import { Lens } from 'monocle-ts';
+import { append } from 'list/curried';
+import { List, list } from 'list';
+
 import * as Lists from './manipulations';
-import { concat } from './util';
 
 export interface Options {
   serverUrl: string;
   securityKey?: string;
-  filters?: string[];
+  filters?: List<string>;
   imagePath?: string;
-  urlParts?: string[];
+  urlParts?: List<string>;
 }
 
 export type ListName = keyof typeof Lists;
@@ -16,12 +18,12 @@ export type OptionLens<A> = Lens<Options, A>;
 
 const { fromProp: prop, fromNullableProp: propOr } = Lens;
 const serverUrl = prop<Options>()('serverUrl');
-const filters = propOr<Options>()('filters', []);
-const urlParts = propOr<Options>()('urlParts', []);
+const filters = propOr<Options>()('filters', list(''));
+const urlParts = propOr<Options>()('urlParts', list(''));
 const imagePath = prop<Options>()('imagePath');
 const securityKey = prop<Options>()('securityKey');
 export { serverUrl, filters, urlParts, imagePath, securityKey };
 
-export const concatTo = (lens: OptionLens<string[]>) => (
+export const appendTo = (lens: OptionLens<List<string>>) => (
   str: string
-) => lens.modify(concat(str));
+) => lens.modify(append(str));

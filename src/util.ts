@@ -1,6 +1,16 @@
+import { eqString } from 'fp-ts/lib/Eq';
+import { flow, Endomorphism } from 'fp-ts/lib/function';
+import { reduce, List } from 'list/curried';
 import { pipe } from 'fp-ts/lib/pipeable';
-import { reduce } from 'fp-ts/lib/Array';
 import { enc } from 'crypto-js';
+import * as L from 'list/curried';
+import * as A from 'fp-ts/lib/Array';
+
+export const uniq: Endomorphism<List<string>> = flow(
+  L.toArray,
+  A.uniq(eqString),
+  L.from
+);
 
 export const replace = (
   searchValue: {
@@ -17,17 +27,13 @@ export const encodeBase64 = (key: any) =>
     replace(/\//g, '_')
   );
 
-export const concat = (str: string) => (arr: string[]): string[] =>
-  arr.concat(str);
-
 const isNonEmpty = (a: string) => a.length > 0;
 export const append = (str: string) => (xs: string) =>
   isNonEmpty(xs) ? str + xs : xs;
 
-export const join = (str: string) => (arr: string[]): string =>
-  pipe(
-    arr,
-    reduce('', (b, a) =>
-      isNonEmpty(a) && isNonEmpty(b) ? b + str + a : b + a
-    )
+export const join = (separator: string) =>
+  reduce<string, string>(
+    (b, a) =>
+      isNonEmpty(a) && isNonEmpty(b) ? b + separator + a : b + a,
+    ''
   );
