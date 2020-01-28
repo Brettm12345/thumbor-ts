@@ -24,10 +24,8 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
-      "tsdx lint --fix",
-      "git add"
-    ],
+    "*.md": "prettier --write",
+    "*.ts": "tsdx lint --fix",
     "package.json": [
       "sort-package-json",
       "git add"
