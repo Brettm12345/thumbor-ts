@@ -2,6 +2,7 @@
   "name": "thumbor-ts",
   "version": "1.1.9",
   "description": "Typescript thumbor url builder",
+  "repository": "github:brettm12345/thumbor-ts",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,9 +11,9 @@
   ],
   "scripts": {
     "build": "tsdx build --target node",
-    "build:watch": "tsdx watch --target node",
     "lint": "tsdx lint src",
     "lint:fix": "tsdx lint src --fix",
+    "start": "tsdx watch --target node",
     "test": "tsdx test",
     "test:coverage": "tsdx test --coverage",
     "test:watch": "tsdx test --watch"
