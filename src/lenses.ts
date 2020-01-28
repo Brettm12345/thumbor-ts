@@ -1,6 +1,5 @@
 import { Lens } from 'monocle-ts';
-import { append } from 'list/curried';
-import { List, list } from 'list';
+import { append, list, List } from 'list/curried';
 
 import * as Lists from './manipulations';
 
