@@ -1,3 +1,4 @@
+import * as crypto from 'crypto-js';
 import { map, uniq } from 'fp-ts/lib/Array';
 import { eqString } from 'fp-ts/lib/Eq';
 import { error } from 'fp-ts/lib/Console';
@@ -10,20 +11,19 @@ import {
   unsafeCoerce,
   constant
 } from 'fp-ts/lib/function';
-import crypto from 'crypto-js';
 
+import * as lists from './manipulations';
 import {
   securityKey,
   urlParts,
   filters,
   imagePath,
   concatTo,
-  OptionLens
+  OptionLens,
+  Options
 } from './lenses';
-import { Options } from './lenses';
-import * as lists from './manipulations';
-import { join, append, encodeBase64 } from './util';
 import { Thumbor, Modifiers } from './types';
+import { join, append, encodeBase64 } from './util';
 
 const Builder = (options: Options): Thumbor => {
   const modifyOptions = (f: Endomorphism<Options>): Thumbor =>

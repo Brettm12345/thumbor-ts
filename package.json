@@ -9,11 +9,17 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsdx build",
-    "build:watch": "tsdx watch",
+    "build": "tsdx build --target node",
+    "build:watch": "tsdx watch --target node",
     "lint": "tsdx lint src",
+    "lint:fix": "tsdx lint src --fix",
     "test": "tsdx test",
-    "test:watch": "tsxd test --watch"
+    "test:coverage": "tsdx test --coverage",
+    "test:watch": "tsdx test --watch"
+  },
+  "prettier": {
+    "printWidth": 70,
+    "singleQuote": true
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
@@ -21,15 +27,28 @@
     "monocle-ts": "^2.0.1"
   },
   "devDependencies": {
-    "@brettm12345/eslint-config-node": "1.0.6",
-    "@types/crypto-js": "3.1.43",
-    "@types/jest": "24.9.1",
-    "@typescript-eslint/parser": "2.17.0",
-    "eslint": "6.8.0",
-    "eslint-plugin-jest": "23.6.0",
-    "eslint-plugin-prefer-arrow-functions": "3.0.1",
-    "prettier": "1.19.1",
-    "tsdx": "0.12.3",
-    "typescript": "3.7.5"
+    "@brettm12345/eslint-config-node": "^1.0.4",
+    "@types/crypto-js": "^3.1.43",
+    "@types/jest": "^24.9.1",
+    "@typescript-eslint/parser": "^2.17.0",
+    "eslint": "^6.6.0",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-prefer-arrow-functions": "^3.0.1",
+    "prettier": "^1.19.1",
+    "tsdx": "^0.12.3",
+    "typescript": "^3.7.5"
+  },
+  "eslint": {
+    "plugins": [
+      "jest"
+    ],
+    "extends": [
+      "@brettm12345/eslint-config-node",
+      "plugin:jest/recommended"
+    ],
+    "rules": {
+      "import/no-duplicates": "off",
+      "unicorn/consistent-function-scoping": "off"
+    }
   }
 }
