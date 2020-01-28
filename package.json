@@ -68,10 +68,10 @@
     "eslint": "6.6.0",
     "eslint-plugin-jest": "23.6.0",
     "eslint-plugin-prefer-arrow-functions": "3.0.1",
-    "husky": "^4.2.1",
-    "lint-staged": "^10.0.3",
+    "husky": "4.2.1",
+    "lint-staged": "10.0.3",
     "prettier": "1.19.1",
-    "sort-package-json": "^1.39.1",
+    "sort-package-json": "1.39.1",
     "tsdx": "0.12.3",
     "typescript": "3.7.5"
   },
