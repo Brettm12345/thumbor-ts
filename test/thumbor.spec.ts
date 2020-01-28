@@ -12,7 +12,7 @@ describe('thumbor', () => {
   });
 
   it('Should fail with no url set', () => {
-    expect(thumbor.buildUrl()).toEqual(
+    expect(thumbor.buildUrl()).toBe(
       'Error building url. No path set'
     );
   });
