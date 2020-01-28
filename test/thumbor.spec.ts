@@ -4,17 +4,10 @@ describe('thumbor', () => {
   const serverUrl = 'http://localhost';
   const unsafeUrl = `${serverUrl}/unsafe`;
   const imagePath = 'react-day-picker.png';
-  const thumbor = Thumbor({ serverUrl });
-  const image = thumbor.setPath(imagePath);
+  const image = Thumbor({ serverUrl, imagePath });
 
   it('Generates urls', () => {
     expect(image.buildUrl()).toBe(`${unsafeUrl}/${imagePath}`);
-  });
-
-  it('Should fail with no url set', () => {
-    expect(thumbor.buildUrl()).toBe(
-      'Error building url. No path set'
-    );
   });
 
   it('Removes duplicates', () => {
@@ -42,24 +35,21 @@ describe('thumbor', () => {
   });
 
   it('Works with many filters', () => {
-    const url = image
-      .quality(80)
-      .autoJpg()
-      .format('webp')
-      .buildUrl();
     ['quality(80)', 'format(webp)', 'autoJpg()'].forEach(
-      expect(url).toContain
+      expect(
+        image
+          .quality(80)
+          .autoJpg()
+          .format('webp')
+          .buildUrl()
+      ).toContain
     );
   });
 
   it('Works with security keys', () => {
-    const secureThumbor = Thumbor({
-      serverUrl,
-      securityKey: '12345'
-    });
     expect(
-      secureThumbor
-        .setPath(imagePath)
+      image
+        .setSecurityKey('12345')
         .resize(30, 30)
         .buildUrl()
     ).toMatchSnapshot();
