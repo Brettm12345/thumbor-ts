@@ -1,4 +1,6 @@
 import { Lens } from 'monocle-ts';
+import * as Lists from './manipulations';
+import { concat } from './util';
 
 export interface Options {
   serverUrl: string;
@@ -8,20 +10,18 @@ export interface Options {
   urlParts?: string[];
 }
 
-const defaults: Required<Omit<Options, 'serverUrl'>> = {
-  imagePath: '',
-  securityKey: '',
-  filters: [],
-  urlParts: []
-};
-
+export type ListName = keyof typeof Lists;
 export type LensName = keyof Options;
-export type OptionalLensName = keyof typeof defaults;
 export type OptionLens<A> = Lens<Options, A>;
 
-const option = Lens.fromNullableProp<Options>();
-const prop = Lens.fromProp<Options>();
-export const lens = (name: LensName) =>
-  name === 'serverUrl' ? prop(name) : option(name, defaults[name]);
-export const optional = (name: keyof typeof defaults) =>
-  option(name, defaults[name]).asOptional().getOption;
+const { fromProp: prop, fromNullableProp: propOr } = Lens;
+const serverUrl = prop<Options>()('serverUrl');
+const filters = propOr<Options>()('filters', []);
+const urlParts = propOr<Options>()('urlParts', []);
+const imagePath = prop<Options>()('imagePath');
+const securityKey = prop<Options>()('securityKey');
+export { serverUrl, filters, urlParts, imagePath, securityKey };
+
+export const concatTo = (lens: OptionLens<string[]>) => (
+  str: string
+) => lens.modify(concat(str));

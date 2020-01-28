@@ -3,8 +3,7 @@ import { identity, unsafeCoerce } from 'fp-ts/lib/function';
 import { Filters, Manipulations, Modifiers } from './types';
 
 const { isArray } = Array;
-type BuildModifiers = <A>(a: A) => Modifiers;
-const buildModifiers: BuildModifiers = unsafeCoerce;
+const buildModifiers: <A>(a: A) => Modifiers = unsafeCoerce;
 
 export const filters = buildModifiers<Filters>({
   autoJpg: () => 'autoJpg()',
