@@ -20,8 +20,8 @@
     src="https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square&label=Minzipped+Size&logo=Webpack"
   >
   <a
-    aria-label="GitHub Workflow Status master"
-    href="https://github.com/Brettm12345/thumbor-ts/actions"
+    aria-label="GitHub Workflow CI Status master"
+    href="https://github.com/Brettm12345/thumbor-ts/actions?query=workflow%3ACI"
   >
     <img
       src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI/master?label=CI&logo=github&style=flat-square"
