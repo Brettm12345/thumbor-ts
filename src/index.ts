@@ -13,7 +13,7 @@ import {
   urlParts,
   ListLens
 } from './lenses';
-import * as manipulations from './manipulations';
+import * as M from './manipulations';
 import { Modifiers, Thumbor } from './types';
 
 const thumbor = (options: Options): Thumbor => {
@@ -40,8 +40,8 @@ const thumbor = (options: Options): Thumbor => {
     );
 
   return {
-    ...combine(urlParts, manipulations.urlParts),
-    ...combine(filters, manipulations.filters),
+    ...combine(urlParts, M.urlParts),
+    ...combine(filters, M.filters),
     setPath: set(imagePath),
     setSecurityKey: set(securityKey),
     buildUrl: build(options)
