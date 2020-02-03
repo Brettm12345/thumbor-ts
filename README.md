@@ -15,6 +15,14 @@
       src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square&logo=Yarn&label=thumbor-ts@latest"
     />
   </a>
+  <a
+    aria-label="Downloads"
+    href="https://www.npmjs.com/package/thumbor-ts"
+  >
+    <img
+      src="https://img.shields.io/npm/dm/thumbor-ts?logo=Npm&style=flat-square&label=Downloads"
+    >
+  </a>
   <img
     alt="Minzipped Size"
     src="https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square&label=Minzipped+Size&logo=Webpack"
