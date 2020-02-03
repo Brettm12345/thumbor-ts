@@ -81,7 +81,7 @@
     "tsdx": "0.12.3",
     "typescript": "3.7.5"
   },
-  "renovate-config": {
+  "renovate": {
     "bumpVersion": "patch",
     "extends": [
       "config:base",
