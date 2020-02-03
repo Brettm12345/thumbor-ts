@@ -12,7 +12,7 @@
     href="https://www.npmjs.com/package/thumbor-ts"
   >
     <img
-      src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square&logo=Npm"
+      src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square&logo=Npm&label=thumbor-ts@latest"
     >
   </a>
   <img
