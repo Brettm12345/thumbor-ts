@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center" >
-  Immutable TypeScript client for building Thumbor URLs.
+  Immutable method chained TypeScript DSL for building Thumbor URLs.
 </p>
 
 <p align="center">
