@@ -8,19 +8,31 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - name: Checkout git
+        uses: actions/checkout@v1
+
+      - name: Setup yarn
+        uses: actions/setup-node@v1
+
+      - name: Install dependencies
       - uses: bahmutov/npm-install@v1
+
+      - name: Build
       - run: yarn build
+
       - name: Bundle size check
         run: yarn size
-      - name: Test & publish code coverage
+
+      - name: Run tests
+        run: yarn test:coverage
+
+      - name: Publish code coverage
         uses: paambaati/codeclimate-action@v2.4.0
+        with:
+          coverageLocations: /coverage/lcov.info
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TOKEN }}
-        with:
-          coverageCommand: yarn test:coverage
-          debug: true
+
       - name: Publish package
         run: yarn publish --patch
         env:
