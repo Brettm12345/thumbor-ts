@@ -5,6 +5,7 @@
 ![David](https://img.shields.io/david/brettm12345/thumbor-ts?style=flat-square)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7cf8bb2f98bbd77fbe60/maintainability)](https://codeclimate.com/github/Brettm12345/thumbor-ts/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/7cf8bb2f98bbd77fbe60/test_coverage)](https://codeclimate.com/github/Brettm12345/thumbor-ts/test_coverage)
 
 Immutable TypeScript client for building Thumbor URLs.
 
@@ -21,13 +22,16 @@ npm install --save thumbor-ts
 import Thumbor from 'thumbor-ts';
 
 // Your encryption key is not required, but your link will be unsafe.
-const thumbor = Thumbor({ serverUrl: 'http://myserver.thumbor.com', securityKey: 'MY_KEY' });
+const thumbor = Thumbor({
+  serverUrl: 'http://myserver.thumbor.com',
+  securityKey: 'MY_KEY'
+});
 
 // Generate your url
 const thumborUrl = thumbor
-    .setImagePath('00223lsvrnzeaf42.png')
-    .resize(50, 50)
-    .smartCrop()
-    .format('webp')
-    .buildUrl();
+  .setImagePath('00223lsvrnzeaf42.png')
+  .resize(50, 50)
+  .smartCrop()
+  .format('webp')
+  .buildUrl();
 ```
