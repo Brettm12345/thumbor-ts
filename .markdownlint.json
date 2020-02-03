@@ -1,3 +1,4 @@
 {
-  "MD033": false
+  "no-inline-html": false,
+  "first-line-h1": false
 }
