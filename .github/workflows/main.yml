@@ -15,10 +15,10 @@ jobs:
         uses: actions/setup-node@v1
 
       - name: Install dependencies
-      - uses: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1
 
       - name: Build
-      - run: yarn build
+        run: yarn build
 
       - name: Bundle size check
         run: yarn size
@@ -29,6 +29,6 @@ jobs:
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v2.4.0
         with:
-          coverageLocations: /coverage/lcov.info
+          coverageLocations: '/coverage/lcov.info'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TOKEN }}
