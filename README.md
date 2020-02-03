@@ -24,7 +24,7 @@
     href="https://github.com/Brettm12345/thumbor-ts/actions?query=workflow%3ACI"
   >
     <img
-      src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI/master?label=CI&logo=github&style=flat-square&cacheSeconds=60"
+      src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI/master?label=CI&logo=github&style=flat-square&cacheSeconds=3600"
     />
   </a>
   <a
@@ -46,7 +46,7 @@
     href="https://codeclimate.com/github/Brettm12345/thumbor-ts/maintainability"
   >
     <img
-      src="https://img.shields.io/codeclimate/maintainability-percentage/Brettm12345/thumbor-ts?logo=Code%20Climate&style=flat-square&label=Maintainability&cacheSeconds=60"
+      src="https://img.shields.io/codeclimate/maintainability-percentage/Brettm12345/thumbor-ts?logo=Code%20Climate&style=flat-square&label=Maintainability&cacheSeconds=3600"
     />
   </a>
   <a
@@ -54,7 +54,7 @@
     href="https://codeclimate.com/github/Brettm12345/thumbor-ts/test_coverage"
   >
     <img
-      src="https://img.shields.io/codeclimate/coverage/Brettm12345/thumbor-ts?label=Coverage&logo=Code%20Climate&style=flat-square&cacheSeconds=60"
+      src="https://img.shields.io/codeclimate/coverage/Brettm12345/thumbor-ts?label=Coverage&logo=Code%20Climate&style=flat-square&cacheSeconds=3600"
     />
   </a>
   <a
@@ -62,7 +62,7 @@
     href="https://github.com/brettm12345/thumbor-ts/commits"
   >
     <img
-      src="https://img.shields.io/github/commit-activity/m/brettm12345/thumbor-ts?label=Commit%20Activity&logo=Github&style=flat-square&cacheSeconds=60"
+      src="https://img.shields.io/github/commit-activity/m/brettm12345/thumbor-ts?label=Commit%20Activity&logo=Github&style=flat-square&cacheSeconds=360"
     />
   </a>
   <a
