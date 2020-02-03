@@ -1,11 +1,10 @@
 # Thumbor TS
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI?style=flat-square)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square)
-![David](https://img.shields.io/david/brettm12345/thumbor-ts?style=flat-square)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7cf8bb2f98bbd77fbe60/maintainability)](https://codeclimate.com/github/Brettm12345/thumbor-ts/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/7cf8bb2f98bbd77fbe60/test_coverage)](https://codeclimate.com/github/Brettm12345/thumbor-ts/test_coverage)
+<p align="center">
+
+![npm (tag)](https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI?style=flat-square) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square) ![David](https://img.shields.io/david/brettm12345/thumbor-ts?style=flat-square) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) [![Maintainability](https://api.codeclimate.com/v1/badges/7cf8bb2f98bbd77fbe60/maintainability)](https://codeclimate.com/github/Brettm12345/thumbor-ts/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/7cf8bb2f98bbd77fbe60/test_coverage)](https://codeclimate.com/github/Brettm12345/thumbor-ts/test_coverage)
+
+</p>
 
 Immutable TypeScript client for building Thumbor URLs.
 
