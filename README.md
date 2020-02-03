@@ -24,7 +24,7 @@
     href="https://github.com/Brettm12345/thumbor-ts/actions?query=workflow%3ACI"
   >
     <img
-      src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI/master?label=CI&logo=github&style=flat-square"
+      src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI/master?label=CI&logo=github&style=flat-square&cacheSeconds=60"
     >
   </a>
   <a
@@ -46,16 +46,32 @@
     href="https://codeclimate.com/github/Brettm12345/thumbor-ts/maintainability"
   >
     <img
-      src="https://img.shields.io/codeclimate/maintainability-percentage/Brettm12345/thumbor-ts?logo=Code%20Climate&style=flat-square&label=Maintainability"
+      src="https://img.shields.io/codeclimate/maintainability-percentage/Brettm12345/thumbor-ts?logo=Code%20Climate&style=flat-square&label=Maintainability&cacheSeconds=60"
     >
   </a>
   <a
     aria-label="Test Coverage"
     href="https://codeclimate.com/github/Brettm12345/thumbor-ts/test_coverage"
   >
-  <img
-    src="https://img.shields.io/codeclimate/coverage/Brettm12345/thumbor-ts?label=Coverage&logo=Code%20Climate&style=flat-square"
+    <img
+      src="https://img.shields.io/codeclimate/coverage/Brettm12345/thumbor-ts?label=Coverage&logo=Code%20Climate&style=flat-square&cacheSeconds=60"
+    >
+  </a>
+  <a
+    aria-label="Github commit activity"
+    href="https://github.com/brettm12345/thumbor-ts/commits"
   >
+    <img
+      src="https://img.shields.io/github/commit-activity/m/brettm12345/thumbor-ts?label=Commit%20Activity&logo=Github&style=flat-square"
+    >
+  </a>
+  <a
+    aria-label="Pull Requests"
+    href="https://github.com/Brettm12345/thumbor-ts/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc"
+  >
+    <img
+      src="https://img.shields.io/badge/contributions-open-success?style=flat-square&logo=Github"
+    >
   </a>
 </p>
 
