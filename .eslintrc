@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "@brettm12345/eslint-config-node",
+    "plugin:jest/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["jest"],
+  "rules": {
+    "import/no-duplicates": "off",
+    "unicorn/consistent-function-scoping": "off"
+  }
+}
