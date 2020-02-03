@@ -32,8 +32,3 @@ jobs:
           coverageLocations: /coverage/lcov.info
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TOKEN }}
-
-      - name: Publish package
-        run: yarn publish --patch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
