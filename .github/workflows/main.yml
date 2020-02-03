@@ -21,3 +21,5 @@ jobs:
         with:
           coverageCommand: yarn test:coverage
           debug: true
+      - name: Publish package
+        run: yarn publish --patch
