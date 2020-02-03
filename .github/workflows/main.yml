@@ -23,3 +23,5 @@ jobs:
           debug: true
       - name: Publish package
         run: yarn publish --patch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
