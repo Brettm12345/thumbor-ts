@@ -2,8 +2,8 @@ import Thumbor from '../src';
 
 describe('thumbor', () => {
   const image = Thumbor({
-    serverUrl: 'http://localhost',
-    imagePath: 'react-day-picker.png'
+    serverUrl: 'https://thumbor',
+    imagePath: 'example.png'
   });
 
   it('Generates urls', () => {
