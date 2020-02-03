@@ -5,16 +5,13 @@ on:
       - master
 jobs:
   build:
-    name: Check & Publish
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout git
+      - name: Checkout
         uses: actions/checkout@v1
 
       - name: Setup node
         uses: actions/setup-node@v1
-        with:
-          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
@@ -31,13 +28,3 @@ jobs:
           coverageCommand: yarn test:ci:coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TOKEN }}
-
-      - name: Setup github packages
-        uses: actions/setup-node@v1
-        with:
-          registry-url: 'https://npm.pkg.github.com'
-
-      - name: Publish to github packages
-        run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

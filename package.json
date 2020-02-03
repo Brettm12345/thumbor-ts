@@ -83,9 +83,6 @@
     "tsdx": "0.12.3",
     "typescript": "3.7.5"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "bundlesize": [
     {
       "path": "dist/*.production.min.js",
