@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   build:
-    name: Test
+    name: Check & Publish
     runs-on: ubuntu-latest
     steps:
       - name: Checkout git
@@ -31,11 +31,6 @@ jobs:
           coverageCommand: yarn test:ci:coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TOKEN }}
-
-      - name: Publish to npm
-        run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
 
       - name: Setup github packages
         uses: actions/setup-node@v1
