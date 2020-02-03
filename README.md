@@ -1,8 +1,8 @@
 # Thumbor TS
 
-<h2 align="center">
+<p align="center" >
   Immutable TypeScript client for building Thumbor URLs.
-</h2>
+</p>
 
 <p align="center">
   <a
