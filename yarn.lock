@@ -4820,7 +4820,7 @@ markdown-it@10.0.0:
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
 
-markdownlint-cli@^0.21.0:
+markdownlint-cli@0.21.0:
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/markdownlint-cli/-/markdownlint-cli-0.21.0.tgz#d792b157e9de63ce1d6b6e13d7cf83d5e552d5e8"
   integrity sha512-gvnczz3W3Wgex851/cIQ/2y8GNhY+EVK8Ael8kRd8hoSQ0ps9xjhtwPwMyJPoiYbAoPxG6vSBFISiysaAbCEZg==
