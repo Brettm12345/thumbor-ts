@@ -48,4 +48,5 @@ const thumbor = (options: Options): Thumbor => {
   };
 };
 
+export type Thumbor = Thumbor;
 export default thumbor;
