@@ -6,16 +6,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build
+      - uses: actions/setup-node@v1
+      - uses: bahmutov/npm-install@v1
+      - run: yarn build
+      - name: Bundle size check
+        run: yarn size
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.4.0
         env:
-          CC_TEST_REPORTER_ID: c2b50f8b017994988a6bece7009880b575fa9b89c557577c7efaa090b0705247
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TOKEN }}
         with:
           coverageCommand: yarn test:coverage
           debug: true
+      - name: Auto publish to NPM
+        uses: luvies/action-yarn-publish@v0.1.1
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
