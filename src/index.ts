@@ -1,38 +1,27 @@
-import * as crypto from 'crypto-js';
-import { list, List, map } from 'list/curried';
-import { error } from 'fp-ts/lib/Console';
-import * as O from 'fp-ts/lib/Option';
 import * as R from 'fp-ts/lib/Record';
+import { Endomorphism, flow, unsafeCoerce } from 'fp-ts/lib/function';
 import { pipe } from 'fp-ts/lib/pipeable';
-import {
-  Endomorphism,
-  flow,
-  unsafeCoerce,
-  constant
-} from 'fp-ts/lib/function';
+import { List } from 'list/curried';
 
-import * as manipulations from './manipulations';
+import build from './buildUrl';
 import {
-  securityKey,
-  urlParts,
+  OptionLens,
+  Options,
+  appendTo as appendToLens,
   filters,
   imagePath,
-  appendTo as appendToLens,
-  OptionLens,
-  Options
+  securityKey,
+  urlParts
 } from './lenses';
-import { Thumbor, Modifiers } from './types';
-import { join, append, uniq, encodeBase64 } from './util';
+import * as manipulations from './manipulations';
+import { Modifiers, Thumbor } from './types';
 
-const Builder = (options: Options): Thumbor => {
+const thumbor = (options: Options): Thumbor => {
   const modifyOptions = (f: Endomorphism<Options>) =>
-    pipe(options, f, Builder);
+    pipe(options, f, thumbor);
 
-  const setOption = <A>(lens: OptionLens<A>) =>
+  const set = <A>(lens: OptionLens<A>) =>
     flow(lens.set, modifyOptions);
-
-  const getOption = <A>(lens: OptionLens<A>) =>
-    pipe(options, lens.get, O.fromNullable);
 
   const appendLens = (lens: OptionLens<List<string>>) =>
     flow(appendToLens(lens), modifyOptions);
@@ -53,60 +42,13 @@ const Builder = (options: Options): Thumbor => {
       unsafeCoerce
     );
 
-  const getHmac = (operation: string) =>
-    pipe(
-      getOption(securityKey),
-      O.fold(constant('unsafe'), key =>
-        pipe(
-          crypto.HmacSHA1(operation + options.imagePath, key),
-          encodeBase64
-        )
-      )
-    );
-
-  const operation = pipe<
-    List<[OptionLens<List<string>>, (xs: List<string>) => string]>,
-    List<string>,
-    string
-  >(
-    list(
-      [urlParts, join('/')],
-      [filters, flow(uniq, join(':'), append('filters:'))]
-    ),
-    map(([lens, f]) => pipe(lens.get(options), f)),
-    join('/')
-  );
-
   return {
     ...combine(urlParts, manipulations.urlParts),
     ...combine(filters, manipulations.filters),
-    setPath: setOption(imagePath),
-    setSecurityKey: setOption(securityKey),
-    buildUrl: () =>
-      pipe(
-        getOption(imagePath),
-        O.fold(
-          flow(
-            error(
-              new Error(
-                'Cannot build url. No path is set please set the url with setImagePath'
-              )
-            ),
-            constant('Error building url. No path set')
-          ),
-          path =>
-            pipe(
-              list(
-                options.serverUrl,
-                getHmac(operation),
-                operation,
-                path
-              ),
-              join('/')
-            )
-        )
-      )
+    setPath: set(imagePath),
+    setSecurityKey: set(securityKey),
+    buildUrl: build(options)
   };
 };
 
-export default Builder;
+export default thumbor;
