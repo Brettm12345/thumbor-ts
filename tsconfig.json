@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "rootDir": ".",
     "strict": true
   },
   "include": ["src/*.ts"],

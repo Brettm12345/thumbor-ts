@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build": "tsdx build --target node",
-    "lint": "eslint {src,test}/*.ts",
+    "lint": "eslint {src,test}/*.ts --format=pretty",
     "lint:fix": "yarn lint --fix",
     "start": "tsdx watch --target node",
     "test": "tsdx test",
@@ -40,30 +40,28 @@
     ]
   },
   "prettier": {
-    "plugins": [],
     "printWidth": 70,
     "singleQuote": true,
     "trailingComma": "none"
   },
   "jest": {
-    "collectCoverage": true,
     "coveragePathIgnorePatterns": [
       "manipulations.ts"
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80,
-        "statements": -10
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
       }
     }
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "fp-ts": "^2.4.2",
+    "fp-ts": "^2.4.3",
     "list": "^2.0.19",
-    "monocle-ts": "^2.0.1"
+    "monocle-ts": "^2.1.0"
   },
   "devDependencies": {
     "@brettm12345/eslint-config-node": "1.0.6",
@@ -71,6 +69,7 @@
     "@types/jest": "25.1.1",
     "@typescript-eslint/parser": "2.18.0",
     "eslint": "6.8.0",
+    "eslint-formatter-pretty": "^3.0.1",
     "eslint-plugin-jest": "23.6.0",
     "eslint-plugin-prefer-arrow-functions": "3.0.1",
     "husky": "4.2.1",
