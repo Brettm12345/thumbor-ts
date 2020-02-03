@@ -1,22 +1,9 @@
 {
+  "bumpVersion": "patch",
   "extends": [
-    "config:base"
-  ],
-  "packageRules": [
-    {
-      "updateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "automerge": true
-    },
-    {
-      "depTypeList": [
-        "devDependencies"
-      ],
-      "automerge": true
-    }
+    "config:base",
+    ":pinDependencies",
+    ":pinDevDependencies",
+    ":automergeAll"
   ]
 }

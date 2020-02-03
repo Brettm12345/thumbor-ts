@@ -87,14 +87,5 @@
       "path": "dist/*.production.min.js",
       "limit": "4kB"
     }
-  ],
-  "renovate": {
-    "bumpVersion": "patch",
-    "extends": [
-      "config:base",
-      ":pinDependencies",
-      ":pinDevDependencies",
-      ":automergeAll"
-    ]
-  }
+  ]
 }
