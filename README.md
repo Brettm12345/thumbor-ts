@@ -62,7 +62,7 @@
     href="https://github.com/brettm12345/thumbor-ts/commits"
   >
     <img
-      src="https://img.shields.io/github/commit-activity/m/brettm12345/thumbor-ts?label=Commit%20Activity&logo=Github&style=flat-square"
+      src="https://img.shields.io/github/commit-activity/m/brettm12345/thumbor-ts?label=Commit%20Activity&logo=Github&style=flat-square&cacheSeconds=60"
     >
   </a>
   <a
