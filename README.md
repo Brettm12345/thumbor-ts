@@ -13,6 +13,10 @@
       src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square"
     >
   </a>
+  <img
+    alt="Minzipped Size"
+    src="https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square"
+  >
   <a
     aria-label="CI Status"
     href="https://github.com/Brettm12345/thumbor-ts/actions"
@@ -20,7 +24,7 @@
   <img
     src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI?style=flat-square"
   >
-  <img alt="Npm Bundle Size" src="https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square">
+  </a>
   <a
     aria-label="Dependencies"
     href="https://github.com/Brettm12345/thumbor-ts/network/dependencies"
