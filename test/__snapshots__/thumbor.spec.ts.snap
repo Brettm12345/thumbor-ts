@@ -1,3 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`thumbor Generates urls 1`] = `"http://localhost/unsafe/react-day-picker.png"`;
+
+exports[`thumbor Removes duplicates 1`] = `"http://localhost/unsafe/filters:grayscale()/react-day-picker.png"`;
+
+exports[`thumbor Works with crop 1`] = `"http://localhost/unsafe/10x10:30x30/react-day-picker.png"`;
+
+exports[`thumbor Works with filter 1`] = `"http://localhost/unsafe/filters:quality(80)/react-day-picker.png"`;
+
+exports[`thumbor Works with many filters 1`] = `"http://localhost/unsafe/filters:quality(80):autoJpg():format(webp)/react-day-picker.png"`;
+
+exports[`thumbor Works with resize 1`] = `"http://localhost/unsafe/30x30/react-day-picker.png"`;
+
 exports[`thumbor Works with security keys 1`] = `"http://localhost/55r7U796iucpURlC4L2L5bL6aAk=/30x30/react-day-picker.png"`;
