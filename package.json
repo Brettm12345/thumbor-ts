@@ -15,8 +15,8 @@
   ],
   "scripts": {
     "build": "tsdx build --target node",
-    "lint": "tsdx lint src",
-    "lint:fix": "tsdx lint src --fix",
+    "lint": "eslint {src,test}/*.ts",
+    "lint:fix": "yarn lint --fix",
     "start": "tsdx watch --target node",
     "test": "tsdx test",
     "test:coverage": "tsdx test --coverage",
@@ -24,21 +24,26 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "post-commit": "git update-index --again"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.md": "prettier --write",
-    "*.ts": "tsdx lint --fix",
+    "*.json": "prettier --write",
+    "*.md": [
+      "markdownlint -c ./.markdownlint.json -f -s",
+      "prettier --write"
+    ],
+    "*.ts": "yarn lint:fix",
     "package.json": [
       "sort-package-json",
-      "git add"
+      "prettier --write"
     ]
   },
   "prettier": {
+    "plugins": [],
     "printWidth": 70,
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "none"
   },
   "jest": {
     "collectCoverage": true,
@@ -70,22 +75,19 @@
     "eslint-plugin-prefer-arrow-functions": "3.0.1",
     "husky": "4.2.1",
     "lint-staged": "10.0.7",
+    "markdownlint-cli": "^0.21.0",
     "prettier": "1.19.1",
     "sort-package-json": "1.39.1",
     "tsdx": "0.12.3",
     "typescript": "3.7.5"
   },
-  "eslint": {
-    "plugins": [
-      "jest"
-    ],
+  "renovate-config": {
+    "bumpVersion": "patch",
     "extends": [
-      "@brettm12345/eslint-config-node",
-      "plugin:jest/recommended"
-    ],
-    "rules": {
-      "import/no-duplicates": "off",
-      "unicorn/consistent-function-scoping": "off"
-    }
+      "config:base",
+      ":pinDependencies",
+      ":pinDevDependencies",
+      ":automergeAll"
+    ]
   }
 }
