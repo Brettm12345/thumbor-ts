@@ -1,6 +1,6 @@
 {
   "name": "thumbor-ts",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Typescript thumbor url builder",
   "repository": "github:brettm12345/thumbor-ts",
   "license": "MIT",
@@ -59,19 +59,19 @@
     }
   },
   "dependencies": {
-    "crypto-js": "^3.1.9-1",
-    "fp-ts": "^2.4.3",
-    "list": "^2.0.19",
-    "monocle-ts": "^2.1.0"
+    "crypto-js": "3.1.9-1",
+    "fp-ts": "2.4.3",
+    "list": "2.0.19",
+    "monocle-ts": "2.1.0"
   },
   "devDependencies": {
     "@brettm12345/eslint-config-node": "1.0.6",
     "@types/crypto-js": "3.1.43",
     "@types/jest": "25.1.1",
     "@typescript-eslint/parser": "2.18.0",
-    "bundlesize": "^0.18.0",
+    "bundlesize": "0.18.0",
     "eslint": "6.8.0",
-    "eslint-formatter-pretty": "^3.0.1",
+    "eslint-formatter-pretty": "3.0.1",
     "eslint-plugin-jest": "23.6.0",
     "eslint-plugin-prefer-arrow-functions": "3.0.1",
     "husky": "4.2.1",

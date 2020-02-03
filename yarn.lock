@@ -1974,7 +1974,7 @@ builtin-modules@^3.1.0:
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-3.1.0.tgz#aad97c15131eb76b65b50ef208e7584cd76a7484"
   integrity sha512-k0KL0aWZuBt2lrxrcASWDfwOLMnodeQjodT/1SxEQAXsHANgo6ZC/VEaSEHCXt7aSTZ4/4H5LKa+tBXmW7Vtvw==
 
-bundlesize@^0.18.0:
+bundlesize@0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/bundlesize/-/bundlesize-0.18.0.tgz#3625520f984f503df8c3d57dd9be2b9c0df40092"
   integrity sha512-GZURr25umfYxZYZUyOlOtJRbYjAn0VfbjbnS0NBcOiF8VcjmhoEhmx8Gw4va8HeQb8j7Ra0ZltY/IeHgSHFXFw==
@@ -2421,7 +2421,7 @@ cross-spawn@^7.0.0:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crypto-js@^3.1.9-1:
+crypto-js@3.1.9-1:
   version "3.1.9-1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
   integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
@@ -2779,7 +2779,7 @@ eslint-config-standard@^14.1.0:
   resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-14.1.0.tgz#b23da2b76fe5a2eba668374f246454e7058f15d4"
   integrity sha512-EF6XkrrGVbvv8hL/kYa/m6vnvmUT+K82pJJc4JJVMM6+Qgqh0pnwprSxdduDLB9p/7bIxD+YV5O0wfb8lmcPbA==
 
-eslint-formatter-pretty@^3.0.1:
+eslint-formatter-pretty@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/eslint-formatter-pretty/-/eslint-formatter-pretty-3.0.1.tgz#97603fcb2ddcc6dd60662d6e9f327a734cc55a54"
   integrity sha512-hhQ/ASD4i6BAEalcEfUxesFtJFftT8xFsimCzUpPbTzygJ4J17yCGcJ3XKCB2g7XTJTv0pi7rVTadfHVmtfSRA==
@@ -3410,7 +3410,7 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-fp-ts@^2.4.3:
+fp-ts@2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.4.3.tgz#6a8be95df8be34caf7a4243802d85c31d65ff1ba"
   integrity sha512-R/QwlxnRlboZIObqKjOUf8rkXz36uSWfJO2M5o2cqf7UiHoHlNMojr/PiUyj8j3l1fOP62dR6nsKvFaRSJBIaQ==
@@ -4818,7 +4818,7 @@ lint-staged@10.0.7:
     string-argv "0.3.1"
     stringify-object "^3.3.0"
 
-list@^2.0.19:
+list@2.0.19:
   version "2.0.19"
   resolved "https://registry.yarnpkg.com/list/-/list-2.0.19.tgz#370a3d7d3e24cfd5ced2c89cda2baf28e31e2830"
   integrity sha512-nnVaRp4RaMAQkCpypTThsdxKqgPMiSwJq93eAm2/IbpUa8sd04XKBhkKu+bMk63HmdjK8b8Cuh4xARHWX2ye/Q==
@@ -5211,7 +5211,7 @@ mkdirp@0.x, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-monocle-ts@^2.1.0:
+monocle-ts@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/monocle-ts/-/monocle-ts-2.1.0.tgz#5c1bbade7952b57e33f2179866467e87d9ed5977"
   integrity sha512-YWH8TDcZSEeCaxp0ZjgccLChnaDvTiUHILpuI0DSZeASYSCgwdz+h6+uEG4QCwYreGsn1oI18ysrcUPv6xWK7w==
