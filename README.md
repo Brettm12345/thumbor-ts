@@ -8,11 +8,11 @@
 
 <p align="center">
   <a
-    aria-label="Npm Package"
-    href="https://www.npmjs.com/package/thumbor-ts"
+    aria-label="Yarn Package"
+    href="https://yarnpkg.com/package/thumbor-ts"
   >
     <img
-      src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square&logo=Npm&label=thumbor-ts@latest"
+      src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square&logo=Yarn&label=thumbor-ts@latest"
     />
   </a>
   <img
