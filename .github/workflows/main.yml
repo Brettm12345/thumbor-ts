@@ -12,6 +12,10 @@ jobs:
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: build
-      - uses: borales/actions-yarn@v2.0.0
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.4.0
+        env:
+          CC_TEST_REPORTER_ID: c2b50f8b017994988a6bece7009880b575fa9b89c557577c7efaa090b0705247
         with:
-          cmd: test
+          coverageCommand: yarn test:coverage
+          debug: true
