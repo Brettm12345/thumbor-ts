@@ -13,19 +13,19 @@
   >
     <img
       src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square&logo=Npm&label=thumbor-ts@latest"
-    >
+    />
   </a>
   <img
     alt="Minzipped Size"
     src="https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square&label=Minzipped+Size&logo=Webpack"
-  >
+  />
   <a
     aria-label="GitHub Workflow CI Status master"
     href="https://github.com/Brettm12345/thumbor-ts/actions?query=workflow%3ACI"
   >
     <img
       src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI/master?label=CI&logo=github&style=flat-square&cacheSeconds=60"
-    >
+    />
   </a>
   <a
     aria-label="Dependencies"
@@ -34,12 +34,12 @@
     <img
       alt="Number of outdated dependencies"
       src="https://img.shields.io/david/brettm12345/thumbor-ts?style=flat-square&label=Dependencies&logo=Yarn"
-    >
+    />
   </a>
   <a aria-label="code style: prettier" href="https://prettier.io">
     <img
       src="https://img.shields.io/badge/Code_Style-prettier-ff69b4.svg?style=flat-square&logo=prettier"
-    >
+    />
   </a>
   <a
     aria-label="Maintainability"
@@ -47,7 +47,7 @@
   >
     <img
       src="https://img.shields.io/codeclimate/maintainability-percentage/Brettm12345/thumbor-ts?logo=Code%20Climate&style=flat-square&label=Maintainability&cacheSeconds=60"
-    >
+    />
   </a>
   <a
     aria-label="Test Coverage"
@@ -55,7 +55,7 @@
   >
     <img
       src="https://img.shields.io/codeclimate/coverage/Brettm12345/thumbor-ts?label=Coverage&logo=Code%20Climate&style=flat-square&cacheSeconds=60"
-    >
+    />
   </a>
   <a
     aria-label="Github commit activity"
@@ -63,7 +63,7 @@
   >
     <img
       src="https://img.shields.io/github/commit-activity/m/brettm12345/thumbor-ts?label=Commit%20Activity&logo=Github&style=flat-square&cacheSeconds=60"
-    >
+    />
   </a>
   <a
     aria-label="Pull Requests"
@@ -71,7 +71,7 @@
   >
     <img
       src="https://img.shields.io/badge/contributions-open-success?style=flat-square&logo=Github"
-    >
+    />
   </a>
 </p>
 
