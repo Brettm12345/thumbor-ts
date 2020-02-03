@@ -27,15 +27,6 @@
       src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI/master?label=CI&logo=github&style=flat-square&cacheSeconds=3600"
     />
   </a>
-  <a
-    aria-label="Dependencies"
-    href="https://github.com/Brettm12345/thumbor-ts/network/dependencies"
-  >
-    <img
-      alt="Number of outdated dependencies"
-      src="https://img.shields.io/david/brettm12345/thumbor-ts?style=flat-square&label=Dependencies&logo=Yarn"
-    />
-  </a>
   <a aria-label="code style: prettier" href="https://prettier.io">
     <img
       src="https://img.shields.io/badge/Code_Style-prettier-ff69b4.svg?style=flat-square&logo=prettier"
