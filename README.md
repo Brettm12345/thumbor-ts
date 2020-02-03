@@ -12,20 +12,20 @@
     href="https://www.npmjs.com/package/thumbor-ts"
   >
     <img
-      src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square"
+      src="https://img.shields.io/npm/v/thumbor-ts/latest?style=flat-square&logo=Npm"
     >
   </a>
   <img
     alt="Minzipped Size"
-    src="https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square"
+    src="https://img.shields.io/bundlephobia/minzip/thumbor-ts?style=flat-square&label=Minzipped+Size&logo=Webpack"
   >
   <a
-    aria-label="CI Status"
+    aria-label="GitHub Workflow Status master"
     href="https://github.com/Brettm12345/thumbor-ts/actions"
   >
-  <img
-    src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI?style=flat-square"
-  >
+    <img
+      src="https://img.shields.io/github/workflow/status/brettm12345/thumbor-ts/CI/master?label=CI&logo=github&style=flat-square"
+    >
   </a>
   <a
     aria-label="Dependencies"
@@ -33,12 +33,12 @@
   >
     <img
       alt="Number of outdated dependencies"
-      src="https://img.shields.io/david/brettm12345/thumbor-ts?style=flat-square"
+      src="https://img.shields.io/david/brettm12345/thumbor-ts?style=flat-square&label=Dependencies&logo=Yarn"
     >
   </a>
   <a aria-label="code style: prettier" href="https://prettier.io">
     <img
-      src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"
+      src="https://img.shields.io/badge/Code_Style-prettier-ff69b4.svg?style=flat-square&logo=prettier"
     >
   </a>
   <a
@@ -46,16 +46,16 @@
     href="https://codeclimate.com/github/Brettm12345/thumbor-ts/maintainability"
   >
     <img
-      src="https://api.codeclimate.com/v1/badges/7cf8bb2f98bbd77fbe60/maintainability"
+      src="https://img.shields.io/codeclimate/maintainability-percentage/Brettm12345/thumbor-ts?logo=Code%20Climate&style=flat-square&label=Maintainability"
     >
   </a>
   <a
     aria-label="Test Coverage"
     href="https://codeclimate.com/github/Brettm12345/thumbor-ts/test_coverage"
   >
-    <img
-      src="https://api.codeclimate.com/v1/badges/7cf8bb2f98bbd77fbe60/test_coverage"
-    />
+  <img
+    src="https://img.shields.io/codeclimate/coverage/Brettm12345/thumbor-ts?label=Coverage&logo=Code%20Climate&style=flat-square"
+  >
   </a>
 </p>
 
