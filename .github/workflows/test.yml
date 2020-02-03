@@ -9,4 +9,4 @@ jobs:
       - uses: bahmutov/npm-install@v1
       - run: yarn build
       - run: yarn size
-      - run: yarn test
+      - run: yarn test:ci

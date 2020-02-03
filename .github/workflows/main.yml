@@ -11,8 +11,11 @@ jobs:
       - name: Checkout git
         uses: actions/checkout@v1
 
-      - name: Setup yarn
+      - name: Setup node
         uses: actions/setup-node@v1
+        with:
+          node-version: '10-x'
+          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
@@ -23,12 +26,24 @@ jobs:
       - name: Bundle size check
         run: yarn size
 
-      - name: Run tests
-        run: yarn test:coverage
-
-      - name: Publish code coverage
+      - name: Run Tests & Publish code coverage
         uses: paambaati/codeclimate-action@v2.4.0
         with:
-          coverageLocations: '/coverage/lcov.info'
+          coverageCommand: yarn test:ci:coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TOKEN }}
+
+      - name: Publish to npm
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
+
+      - name: Setup github packages
+        uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Publish to github packages
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

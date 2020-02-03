@@ -20,8 +20,9 @@
     "size": "bundlesize",
     "start": "tsdx watch --target node",
     "test": "tsdx test",
-    "test:coverage": "tsdx test --coverage",
-    "test:watch": "tsdx test --watch"
+    "test:ci": "yarn test --ci",
+    "test:ci:coverage": "yarn test:ci --coverage",
+    "test:watch": "yarn test --watch"
   },
   "husky": {
     "hooks": {
