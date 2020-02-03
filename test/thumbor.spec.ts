@@ -28,6 +28,12 @@ describe('thumbor', () => {
     expect(image.crop(10, 10, 30, 30).buildUrl()).toMatchSnapshot();
   });
 
+  it('Properly flips images', () => {
+    expect(
+      image.resize(30, 30, true, true).buildUrl()
+    ).toMatchSnapshot();
+  });
+
   it('Works with filter', () => {
     expect(image.quality(80).buildUrl()).toMatchSnapshot();
   });

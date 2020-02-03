@@ -2,6 +2,8 @@
 
 exports[`thumbor Generates urls 1`] = `"https://thumbor/unsafe/example.png"`;
 
+exports[`thumbor Properly flips images 1`] = `"https://thumbor/unsafe/-30x-30/example.png"`;
+
 exports[`thumbor Removes duplicates 1`] = `"https://thumbor/unsafe/filters:grayscale()/example.png"`;
 
 exports[`thumbor Works with crop 1`] = `"https://thumbor/unsafe/10x10:30x30/example.png"`;

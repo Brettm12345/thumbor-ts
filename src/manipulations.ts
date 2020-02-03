@@ -37,7 +37,7 @@ export const filters = buildModifiers<Filters>({
   stripExif: () => `strip_exif()`
 });
 
-const dash = (bool: boolean): string => (bool ? '-' : '');
+const neg = (bool: boolean): string => (bool ? '-' : '');
 
 export const urlParts = buildModifiers<Manipulations>({
   resize: (
@@ -46,7 +46,7 @@ export const urlParts = buildModifiers<Manipulations>({
     flipVertically = false,
     flipHorizontally = false
   ) =>
-    `${dash(flipVertically)}${width}x${dash(
+    `${neg(flipVertically)}${width}x${neg(
       flipHorizontally
     )}${height}`,
   fitIn: (width, height) => `fit-in/${width}x${height}`,
