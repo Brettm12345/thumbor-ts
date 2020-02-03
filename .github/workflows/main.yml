@@ -21,8 +21,3 @@ jobs:
         with:
           coverageCommand: yarn test:coverage
           debug: true
-      - name: Auto publish to NPM
-        uses: luvies/action-yarn-publish@v0.1.1
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
