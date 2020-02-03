@@ -14,6 +14,7 @@ export type Options = Readonly<{
 export type ListName = keyof typeof Lists;
 export type LensName = keyof Options;
 export type OptionLens<A> = Lens<Options, A>;
+export type ListLens = OptionLens<List<string>>;
 
 const { fromProp: prop, fromNullableProp: propOr } = Lens;
 const serverUrl = prop<Options>()('serverUrl');

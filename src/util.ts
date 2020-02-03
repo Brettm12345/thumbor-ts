@@ -1,15 +1,9 @@
-import { enc } from 'crypto-js';
 import { pipe } from 'fp-ts/lib/pipeable';
 import * as L from 'list/curried';
 import { reduce, List } from 'list/curried';
 
 export const uniq = (list: List<string>) =>
   pipe(new Set(list), L.from);
-
-export const encodeBase64 = (key: any) =>
-  enc.Base64.stringify(key)
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_');
 
 const isNonEmpty = (a: string) => a.length > 0;
 

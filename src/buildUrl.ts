@@ -8,7 +8,12 @@ import { list } from 'list';
 
 import getOperation from './getOperation';
 import { Options } from './lenses';
-import { encodeBase64, join } from './util';
+import { join } from './util';
+
+export const encodeBase64 = (key: any) =>
+  crypto.enc.Base64.stringify(key)
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
 
 const buildUrl = (options: Options): IO<string> => () => {
   const { serverUrl, imagePath, securityKey } = options;
