@@ -10,7 +10,7 @@ import getOperation from './getOperation';
 import { Options } from './lenses';
 import { join } from './util';
 
-export const encodeBase64 = (key: any) =>
+export const encodeBase64 = (key: any): string =>
   crypto.enc.Base64.stringify(key)
     .replace(/\+/g, '-')
     .replace(/\//g, '_');
