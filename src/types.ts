@@ -192,14 +192,14 @@ export type Manipulations<T = string> = Readonly<{
    *
    * Use a value of 'orig' to use an original image dimension. E.g. for a 640
    * x 480 image, `.resize(320, 'orig')` yields a 320 x 480 thumbnail.
-   * @param  {number} width
-   * @param  {number} height
+   * @param  {number\|string} width
+   * @param  {number\|string} height
    * @param  {boolean} flipVertically
    * @param  {boolean} flipHorizontally
    */
   resize: (
-    width: number,
-    height: number,
+    width: number | 'orig',
+    height: number | 'orig',
     flipVertically?: boolean,
     flipHorizontally?: boolean
   ) => T;
