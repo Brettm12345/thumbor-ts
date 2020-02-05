@@ -22,6 +22,7 @@
     "test": "tsdx test",
     "test:ci": "yarn test --ci",
     "test:ci:coverage": "yarn test:ci --coverage",
+    "test:coverage": "yarn test --coverage",
     "test:watch": "yarn test --watch"
   },
   "husky": {
