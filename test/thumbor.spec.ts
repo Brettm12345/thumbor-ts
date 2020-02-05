@@ -1,6 +1,6 @@
 import Thumbor from '../src';
 
-describe('thumbor', () => {
+describe('Thumbor', () => {
   const image = Thumbor({
     serverUrl: 'https://thumbor',
     imagePath: 'example.png'
