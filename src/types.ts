@@ -230,7 +230,7 @@ export type Manipulations<T = string> = Readonly<{
   vAlign: (vAlign: VAlign) => T;
 
   /**
-   * Specify that JSON metadata should be returned instead of the thumbnailed
+   * Specify that JSON metadata should be returned instead of the thumbnail
    * image.
    */
   metaDataOnly: () => T;
@@ -266,7 +266,7 @@ export interface Thumbor
   readonly setSecurityKey: (securityKey: string) => Thumbor;
 
   /**
-   * Combine image url and operations with secure and unsecure (unsafe) paths
+   * Combine image url and operations with secure and unsafe paths
    * @returns {string} - The built url
    */
   readonly buildUrl: () => string;
