@@ -23,7 +23,8 @@ const buildUrl = (options: Options): IO<string> => () => {
     O.fromNullable,
     O.fold(constant('unsafe'), key =>
       pipe(crypto.HmacSHA1(operation + imagePath, key), encodeBase64)
-    )
+    ),
+    encodeURI
   );
   return pipe(
     imagePath,
