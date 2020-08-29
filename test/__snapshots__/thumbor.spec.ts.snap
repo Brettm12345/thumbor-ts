@@ -12,6 +12,8 @@ exports[`Thumbor Works with filter 1`] = `"https://thumbor/unsafe/filters:qualit
 
 exports[`Thumbor Works with many filters 1`] = `"https://thumbor/unsafe/filters:quality(80):autoJpg():format(webp)/example.png"`;
 
+exports[`Thumbor Works with metadata only 1`] = `"https://thumbor/unsafe/meta/example.png"`;
+
 exports[`Thumbor Works with resize 1`] = `"https://thumbor/unsafe/30x30/example.png"`;
 
 exports[`Thumbor Works with security keys 1`] = `"https://thumbor/_SZEbq_kF9aU4FZ3t3LNoPFYQwg=/30x30/example.png"`;

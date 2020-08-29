@@ -48,6 +48,14 @@ describe('Thumbor', () => {
     ).toMatchSnapshot();
   });
 
+  it('Works with metadata only', () => {
+    expect(
+      image
+        .resize(30, 30)
+        .metaDataOnly()
+        .buildUrl()
+    ).toMatchSnapshot();
+  });
   it('Works with security keys', () => {
     expect(
       image
