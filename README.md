@@ -93,7 +93,7 @@ const thumbor = Thumbor({
 
 // Generate your url
 const thumborUrl = thumbor
-  .setImagePath('00223lsvrnzeaf42.png')
+  .setPath('00223lsvrnzeaf42.png')
   .resize(50, 50)
   .smartCrop()
   .format('webp')
