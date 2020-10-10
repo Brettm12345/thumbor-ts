@@ -38,7 +38,11 @@ const buildUrl = (options: Options): IO<string> => () => {
         ),
         constant('Error building url. No path set')
       ),
-      path => pipe(list(serverUrl, hmac, operation, path), join('/'))
+      path =>
+        pipe(
+          list(serverUrl, hmac, operation, encodeURIComponent(path)),
+          join('/')
+        )
     )
   );
 };

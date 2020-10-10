@@ -2,6 +2,8 @@
 
 exports[`Thumbor Generates urls 1`] = `"https://thumbor/unsafe/example.png"`;
 
+exports[`Thumbor Handles background color. 1`] = `"https://thumbor/unsafe/filters:background_color(#ffffff)/example.png"`;
+
 exports[`Thumbor Properly flips images 1`] = `"https://thumbor/unsafe/-30x-30/example.png"`;
 
 exports[`Thumbor Removes duplicates 1`] = `"https://thumbor/unsafe/filters:grayscale()/example.png"`;

@@ -1,4 +1,5 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "jest.pathToJest": "yarn test"
+  "jest.pathToJest": "yarn test",
+  "cSpell.words": ["Exif", "GIFs", "PNGs"]
 }

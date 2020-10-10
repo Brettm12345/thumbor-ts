@@ -10,6 +10,11 @@ describe('Thumbor', () => {
     expect(image.buildUrl()).toMatchSnapshot();
   });
 
+  it('Handles background color.', () => {
+    expect(
+      image.backgroundColor('#ffffff').buildUrl()
+    ).toMatchSnapshot();
+  });
   it('Removes duplicates', () => {
     expect(
       image
