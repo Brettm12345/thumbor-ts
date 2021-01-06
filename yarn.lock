@@ -5664,10 +5664,10 @@ mkdirp@0.x, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-monocle-ts@2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/monocle-ts/-/monocle-ts-2.3.3.tgz#1e6d83dcf42bcb96b74fdda07813c2a47ec6cfa4"
-  integrity sha512-pcQyauWO2vapxyZgbhTd73Dv8TmTELx1rL81bvrtPO2sUYTi1MIHmw3j/iMyeNaJwTmnGNAjqJpYV8Gq1Eu68g==
+monocle-ts@2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/monocle-ts/-/monocle-ts-2.3.4.tgz#19136b1c9ed6d01b7f0f4cbdc5e06e24658bff0a"
+  integrity sha512-94QvNtNRyh5CwLzZpJADCsSuv9mfuXucjz2Xs7nB3Jhij/rYKNMW2ugKvg7OxWIdnPQTYApEivdoR0rGhMCirA==
 
 mri@^1.1.0:
   version "1.1.4"
