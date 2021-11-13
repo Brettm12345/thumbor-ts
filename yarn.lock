@@ -3228,10 +3228,10 @@ eslint-plugin-node@^10.0.0:
     resolve "^1.10.1"
     semver "^6.1.0"
 
-eslint-plugin-prefer-arrow-functions@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prefer-arrow-functions/-/eslint-plugin-prefer-arrow-functions-3.0.1.tgz#996bf26e93c8cfffff34e86bfe9ff71cbb54bbe2"
-  integrity sha512-Sqwa3p33qXd0Yrva7uYkms0UOzxKIFnv3ihqplSYtal/i4gbdDDM2GvJG4Ob2O5VLw61act/qPt0b41Eg/47Yg==
+eslint-plugin-prefer-arrow-functions@3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prefer-arrow-functions/-/eslint-plugin-prefer-arrow-functions-3.1.4.tgz#a0761c7a0ba71461f6b2136fdf7f7cec1c82d778"
+  integrity sha512-LSO8VibqBKqzelr+L21mEIfachavCon+1SEumCJ6U8Ze2q0pntyojmomcVwd9RZBjrP+HV6k1Osz0B3Xwdq8WA==
 
 eslint-plugin-prettier@^3.1.0, eslint-plugin-prettier@^3.1.1:
   version "3.1.2"
