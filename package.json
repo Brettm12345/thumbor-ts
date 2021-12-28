@@ -1,6 +1,6 @@
 {
   "name": "thumbor-ts",
-  "version": "1.3.294",
+  "version": "1.3.295",
   "description": "Typescript thumbor url builder",
   "repository": "github:brettm12345/thumbor-ts",
   "license": "MIT",
@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@brettm12345/eslint-config-node": "1.0.6",
-    "@types/crypto-js": "4.0.2",
+    "@types/crypto-js": "4.1.0",
     "@types/jest": "27.0.3",
     "@typescript-eslint/parser": "4.33.0",
     "bundlesize": "0.18.1",
