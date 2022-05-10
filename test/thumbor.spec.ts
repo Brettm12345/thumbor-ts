@@ -10,6 +10,14 @@ describe('Thumbor', () => {
     expect(image.buildUrl()).toMatchSnapshot();
   });
 
+  it('Generates urls when path has slashes', () => {
+    const imageWithLongPath = Thumbor({
+      serverUrl: 'https://thumbor',
+      imagePath: 'long/path/with/slashes/example.png'
+    });
+    expect(imageWithLongPath.buildUrl()).toMatchSnapshot();
+  });
+
   it('Handles background color.', () => {
     expect(
       image.backgroundColor('#ffffff').buildUrl()

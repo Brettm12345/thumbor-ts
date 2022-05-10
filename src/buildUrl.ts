@@ -40,7 +40,7 @@ const buildUrl = (options: Options): IO<string> => () => {
       ),
       path =>
         pipe(
-          list(serverUrl, hmac, operation, encodeURIComponent(path)),
+          list(serverUrl, hmac, operation, path),
           join('/')
         )
     )
