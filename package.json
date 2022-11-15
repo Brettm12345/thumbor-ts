@@ -1,6 +1,6 @@
 {
   "name": "thumbor-ts",
-  "version": "1.3.499",
+  "version": "1.3.500",
   "description": "Typescript thumbor url builder",
   "repository": "github:brettm12345/thumbor-ts",
   "license": "MIT",
@@ -82,7 +82,7 @@
     "prettier": "2.7.1",
     "sort-package-json": "2.1.0",
     "tsdx": "0.14.1",
-    "typescript": "4.8.4"
+    "typescript": "4.9.3"
   },
   "bundlesize": [
     {
